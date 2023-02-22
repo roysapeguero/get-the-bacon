@@ -1,24 +1,31 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import './Navigation.css';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProfileButton from "./ProfileButton";
+import "./Navigation.css";
+import piggy from "../../assets/piggy-icon.png";
 
-function Navigation({ isLoaded }){
-	const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+  const sessionUser = useSelector((state) => state.session.user);
 
-	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">Home</NavLink>
-			</li>
-			{isLoaded && (
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
-		</ul>
-	);
+  return (
+    <div className="nav-container">
+      <div className="nav-bar">
+        <div className="header-left">
+					<NavLink className='link 'exact to="/">
+          	<div className="logo">
+              <img className="logo-img" src={piggy} alt="" />
+              <h1 className="logo-text"><em>don't forget the bacon</em></h1>
+          	</div>
+					</NavLink>
+        </div>
+				<div className="header-right">
+        {isLoaded && <ProfileButton user={sessionUser} />}
+				</div>
+      </div>
+    </div>
+    // </div>
+  );
 }
 
 export default Navigation;

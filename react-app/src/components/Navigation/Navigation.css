@@ -5,3 +5,59 @@
 .hidden {
   display: none;
 }
+.nav-container {
+  background-color: #D09099;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 0 20px;
+  /* border: 1px solid red; */
+
+  border-bottom: 1px solid rgb(240, 240, 240);
+}
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 950px;
+  width: 80%;
+  max-width: 1000px;
+  min-height: 114px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  width: 300px;
+  /* border: 1px solid red; */
+}
+
+.logo-img {
+  width: 83px;
+  height: fit-content;
+  /* border: 1px solid red; */
+
+}
+
+.logo-text {
+  font-size: 22px;
+  width: 150px;
+  margin-bottom: 0;
+  margin-left: -4px;
+  font-weight: 600;
+  letter-spacing: 0;
+  /* height: 100%; */
+  /* text-decoration: none; */
+  color: white;
+}
+
+.link,
+.link:visited {
+    color: inherit;
+    text-decoration: none;
+}
