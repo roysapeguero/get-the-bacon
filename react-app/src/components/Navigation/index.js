@@ -15,7 +15,7 @@ function Navigation({ isLoaded }) {
 					<NavLink className='link 'exact to="/">
           	<div className="logo">
               <img className="logo-img" src={piggy} alt="" />
-              <h1 className="logo-text"><em>don't forget the bacon</em></h1>
+              <h1 className="logo-text"><em>get the bacon</em></h1>
           	</div>
 					</NavLink>
         </div>

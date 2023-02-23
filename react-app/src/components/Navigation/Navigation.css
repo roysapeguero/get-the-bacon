@@ -31,10 +31,10 @@
 .logo {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
   align-items: center;
-  width: 300px;
+  width: 150px;
   /* border: 1px solid red; */
+
 }
 
 .logo-img {
