@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasksThunk, editTaskThunk } from "../../../store/tasks";
+import { getTasksThunk, editTaskThunk, getTaskThunk, deleteTaskThunk } from "../../../store/tasks";
 import "./AllTasks.css";
+import OpenModalButton from "../../OpenModalButton";
+import TaskShow from "../TaskShow/TaskShow";
 
 const TaskItem = ({ task, status }) => {
   const dispatch = useDispatch()
   const handleClick = () => {
-    const newTask = { ...task };
+    // task = { ...task };
     if (status === "Not Started" || status === "In Progress") {
-      newTask.status = "Done";
+      task.status = "Done";
     } else {
-      newTask.status = "In Progress";
+      task.status = "In Progress";
     }
-    dispatch(editTaskThunk(newTask.id, newTask));
+    dispatch(editTaskThunk(task.id, task));
+    // dispatch(deleteTaskThunk(task.id, task));
+
   };
+
 
   return (
     <div>
@@ -23,9 +28,13 @@ const TaskItem = ({ task, status }) => {
         type="checkbox"
         checked={status === "Done"}
       />
-      <label className="task-label" htmlFor="task-name">
-        {task.name}
-      </label>
+      <OpenModalButton
+        className="edit-task-modal-button"
+        modalComponent={
+        <TaskShow task={task} />
+        }
+        buttonText={task.name}
+      />
     </div>
   );
 };
@@ -54,6 +63,15 @@ const AllTasks = () => {
       <div className="tasks-container">
         <ul className="tasks-wrapper">{taskItems}</ul>
       </div>
+      <OpenModalButton
+        className="add-task-modal-button"
+        modalComponent={
+        <TaskShow />
+        }
+        buttonText={<label className="add-task-label" >
+          Add task
+      </label>}
+      />
     </div>
   );
 };

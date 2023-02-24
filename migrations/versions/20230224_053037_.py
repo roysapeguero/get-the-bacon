@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 9e79cb1ce188
+Revision ID: 99c3a087e284
 Revises:
-Create Date: 2023-02-23 07:54:03.685293
+Create Date: 2023-02-24 05:30:37.025480
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '9e79cb1ce188'
+revision = '99c3a087e284'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,7 +40,7 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=200), nullable=False),
     sa.Column('notes', sa.String(length=2000), nullable=True),
-    sa.Column('status', sa.Enum('Not Started', 'In Progress', 'Done'), nullable=False),
+    sa.Column('status', sa.String(), nullable=False),
     sa.Column('due', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -56,7 +56,7 @@ def upgrade():
     sa.Column('name', sa.String(length=200), nullable=False),
     sa.Column('notes', sa.String(length=2000), nullable=True),
     sa.Column('due', sa.String(), nullable=True),
-    sa.Column('status', sa.Enum('Not Started', 'In Progress', 'Done'), nullable=False),
+    sa.Column('status', sa.String(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['list_id'], ['lists.id'], ),

@@ -15,7 +15,7 @@ class Task(db.Model):
     name = db.Column(db.String(200), nullable=False)
     notes = db.Column(db.String(2000))
     due = db.Column(db.String)
-    status = db.Column(db.Enum('Not Started', 'In Progress', 'Done'), default='Not started',  nullable=False)
+    status = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 

@@ -4,7 +4,7 @@ const CREATE_TASK = "tasks/CREATE_TASK";
 const EDIT_TASK = "tasks/EDIT_TASK";
 const DELETE_TASK = "tasks/DELETE_TASK";
 
-const loadTasks = (tasks) => ({
+export const loadTasks = (tasks) => ({
   type: GET_TASKS,
   tasks,
 });
@@ -20,7 +20,7 @@ const createTask = (task) => ({
 });
 
 
-export const editTask = (task) => {
+const editTask = (task) => {
   return {
     type: EDIT_TASK,
     task
@@ -38,11 +38,12 @@ export const getTasksThunk = () => async (dispatch) => {
   const res = await fetch(`/api/tasks`);
 
   if (res.ok) {
-    const tasks = await res.json();
-    dispatch(loadTasks(tasks));
-    return tasks;
+    const data = await res.json();
+    // console.log('data', data)
+    dispatch(loadTasks(data));
   } else {
-    return res;
+    const data = await res.json();
+    if (data.errors) return res;
   }
 };
 
@@ -53,15 +54,13 @@ export const getTaskThunk = (taskId) => async (dispatch) => {
   if (res.ok) {
     const task = await res.json();
     dispatch(loadTask(task));
-    return task;
   } else {
     const data = await res.json();
-    if (data.errors) {
-      return data;
-    }
+    if (data.errors) return res
   }
 };
 
+// Edit
 export const editTaskThunk = (taskId, taskData) => async (dispatch) => {
   const res = await fetch(`/api/tasks/${taskId}`, {
     method: "PUT",
@@ -73,18 +72,21 @@ export const editTaskThunk = (taskId, taskData) => async (dispatch) => {
   if (res.ok) {
     const task = await res.json();
     dispatch(editTask(task));
+    // dispatch(getTaskThunk(task.id));
+  } else {
+    const data = await res.json();
+    if (data.errors) {
+      return res;
+    }
   }
 };
 
-
-
-
 // Create Task
-export const createTaskThunk = (data) => async (dispatch) => {
+export const createTaskThunk = (task) => async (dispatch) => {
   const res = await fetch("/api/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: data,
+    body: JSON.stringify(task),
   });
 
   if (res.ok) {
@@ -93,26 +95,10 @@ export const createTaskThunk = (data) => async (dispatch) => {
     return createdTask;
   } else {
     const data = await res.json();
-    if (data.errors) {
-      return data;
-    }
+    if (data.errors) return res;
   }
 };
 
-// Edit Task
-// export const editTaskThunk = (task) => async (dispatch) => {
-//   const res = await fetch(`/api/tasks/${task.id}`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(task),
-//   });
-//   if (res.ok) {
-//     const editedTask = await res.json();
-//     dispatch(editTask(editedTask));
-//   }
-// };
 
 // Delete Task
 export const deleteTaskThunk = (taskId) => async (dispatch) => {
@@ -121,9 +107,7 @@ export const deleteTaskThunk = (taskId) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const deletedTask = await res.json();
     dispatch(deleteTask(taskId));
-    return deletedTask;
   }
 };
 
@@ -142,7 +126,14 @@ const tasksReducer = (state = initialState, action) => {
       newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
       return newState
     case EDIT_TASK:
-      return {...state, singleTask: action.task}
+      newState.allTasks = { ...newState.allTasks };
+      newState.allTasks[action.task.id] = {
+        ...state.allTasks[action.task.id],
+        ...action.task,
+      };
+      newState.singleTask = { ...state.singleTask, ...action.task };
+      return newState;
+
     case DELETE_TASK:
       newState.allTasks = { ...state.allTasks }
       delete newState.allTasks[action.taskId]

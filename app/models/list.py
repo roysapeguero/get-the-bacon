@@ -13,7 +13,7 @@ class List(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     name = db.Column(db.String(200), nullable=False)
     notes = db.Column(db.String(2000))
-    status = db.Column(db.Enum('Not Started', 'In Progress', 'Done'), default='Not started',  nullable=False)
+    status = db.Column(db.String, nullable=False)
     due = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())

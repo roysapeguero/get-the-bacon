@@ -68,15 +68,18 @@ def edit_task(id):
 
     form = TaskForm()
     task = Task.query.get(id)
-    if task:
-        task.user_id = current_user.id
-        task.list_id = form.data['list_id']
-        task.name = form.data['name']
-        task.notes = form.data['notes']
-        task.due = form.data['due']
-        task.status = form.data['status']
-        task.updated_at = datetime.datetime.now()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
+    if form.validate_on_submit():
+        task = Task(
+            user_id = current_user.id,
+            list_id = form.data['list_id'],
+            name = form.data['name'],
+            notes = form.data['notes'],
+            due = form.data['due'],
+            status = form.data['status'],
+            updated_at = datetime.datetime.now()
+        )
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
