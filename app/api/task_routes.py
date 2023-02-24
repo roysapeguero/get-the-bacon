@@ -19,7 +19,7 @@ def get_all_tasks():
 # Get task by id
 @task_routes.route('/<int:id>')
 @login_required
-def get_task():
+def get_task(id):
     """
     Query for one tasks and returns in task a dictionary
     """
@@ -49,7 +49,7 @@ def create_task():
         name = form.data['name'],
         notes = form.data['notes'],
         due = form.data['due'],
-        status = form.data['name'],
+        status = form.data['status'],
         created_at = datetime.datetime.now(),
         updated_at = datetime.datetime.now()
         )
@@ -74,7 +74,7 @@ def edit_task(id):
         task.name = form.data['name']
         task.notes = form.data['notes']
         task.due = form.data['due']
-        task.status = form.data['name']
+        task.status = form.data['status']
         task.updated_at = datetime.datetime.now()
 
         db.session.add(task)

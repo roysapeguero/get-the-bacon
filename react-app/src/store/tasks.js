@@ -12,17 +12,20 @@ const loadTasks = (tasks) => ({
 const loadTask = (task) => ({
   type: GET_TASK,
   task,
-});
+  });
 
 const createTask = (task) => ({
   type: CREATE_TASK,
   task,
 });
 
-const editTask = (task) => ({
-  type: EDIT_TASK,
-  task,
-});
+
+export const editTask = (task) => {
+  return {
+    type: EDIT_TASK,
+    task
+  };
+};
 
 const deleteTask = (taskId) => ({
   type: DELETE_TASK,
@@ -59,6 +62,23 @@ export const getTaskThunk = (taskId) => async (dispatch) => {
   }
 };
 
+export const editTaskThunk = (taskId, taskData) => async (dispatch) => {
+  const res = await fetch(`/api/tasks/${taskId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(taskData),
+  });
+  if (res.ok) {
+    const task = await res.json();
+    dispatch(editTask(task));
+  }
+};
+
+
+
+
 // Create Task
 export const createTaskThunk = (data) => async (dispatch) => {
   const res = await fetch("/api/tasks", {
@@ -80,19 +100,19 @@ export const createTaskThunk = (data) => async (dispatch) => {
 };
 
 // Edit Task
-export const editTaskThunk = (task) => async (dispatch) => {
-  const res = await fetch(`/api/tasks/${task.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(task),
-  });
-  if (res.ok) {
-    const editedTask = await res.json();
-    dispatch(editTask(editedTask));
-  }
-};
+// export const editTaskThunk = (task) => async (dispatch) => {
+//   const res = await fetch(`/api/tasks/${task.id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(task),
+//   });
+//   if (res.ok) {
+//     const editedTask = await res.json();
+//     dispatch(editTask(editedTask));
+//   }
+// };
 
 // Delete Task
 export const deleteTaskThunk = (taskId) => async (dispatch) => {
@@ -117,8 +137,7 @@ const tasksReducer = (state = initialState, action) => {
       newState.allTasks = action.tasks;
       return newState;
     case GET_TASK:
-      newState = { singleTask: { ...state.singleTask, ...action.task }}
-      return newState
+      return { ...state, singleTask: action.task };
     case CREATE_TASK:
       newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
       return newState

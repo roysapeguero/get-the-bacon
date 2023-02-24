@@ -1,33 +1,39 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasksThunk, getTaskThunk } from "../../../store/tasks";
+import { getTasksThunk, editTaskThunk } from "../../../store/tasks";
 import "./AllTasks.css";
 
-const TaskItem = ({task}) => {
-
-
+const TaskItem = ({ task, status }) => {
+  const dispatch = useDispatch()
   const handleClick = () => {
-
-    if (task.status === 'Not Started' || task.status === 'In Progress') {
-      task.status = 'Done'
+    const newTask = { ...task };
+    if (status === "Not Started" || status === "In Progress") {
+      newTask.status = "Done";
     } else {
-      task.status = 'In Progress'
+      newTask.status = "In Progress";
     }
-
-  }
+    dispatch(editTaskThunk(newTask.id, newTask));
+  };
 
   return (
     <div>
-        <input onClick={() => handleClick()} id='task-name' type='checkbox' />
-        <label className="task-label" htmlFor='task-name'>{task.name}</label>
+      <input
+        onChange={() => handleClick()}
+        id="task-name"
+        type="checkbox"
+        checked={status === "Done"}
+      />
+      <label className="task-label" htmlFor="task-name">
+        {task.name}
+      </label>
     </div>
-  )
-}
+  );
+};
 
 const AllTasks = () => {
   const dispatch = useDispatch();
   const allTasks = useSelector((state) => state.Tasks.allTasks);
-  const allTasksArr = Object.values(allTasks);
+  const allTasksArr = allTasks ? Object.values(allTasks) : [];
 
   useEffect(() => {
     dispatch(getTasksThunk());
@@ -36,10 +42,9 @@ const AllTasks = () => {
   let taskItems;
   if (allTasksArr.length) {
     taskItems = allTasksArr.map((task) => {
-      return <TaskItem key={task.id} task={task} />;
+      return <TaskItem key={task.id} task={task} status={task.status} />;
     });
   }
-
 
   if (!allTasksArr.length) return null;
 
