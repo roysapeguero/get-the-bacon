@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasksThunk, editTaskThunk, getTaskThunk, deleteTaskThunk } from "../../../store/tasks";
 import "./AllTasks.css";
@@ -7,26 +7,30 @@ import TaskShow from "../TaskShow/TaskShow";
 
 const TaskItem = ({ task, status }) => {
   const dispatch = useDispatch()
-  const handleClick = () => {
-    // task = { ...task };
-    if (status === "Not Started" || status === "In Progress") {
-      task.status = "Done";
-    } else {
-      task.status = "In Progress";
+  const [isChecked, setIsChecked] = useState(false)
+
+  useEffect(() => {
+    const storedCheckboxState = localStorage.getItem(`checkbox-${task.id}`);
+    if (storedCheckboxState !== null) {
+      setIsChecked(JSON.parse(storedCheckboxState));
     }
-    dispatch(editTaskThunk(task.id, task));
-    // dispatch(deleteTaskThunk(task.id, task));
+  }, [task.id]);
 
-  };
+  const checkHandler = () => {
+    setIsChecked(!isChecked)
+  }
 
+  useEffect(() => {
+    localStorage.setItem(`checkbox-${task.id}`, JSON.stringify(isChecked));
+  }, [task.id, isChecked]);
 
   return (
     <div>
       <input
-        onChange={() => handleClick()}
+        onChange={checkHandler}
         id="task-name"
         type="checkbox"
-        checked={status === "Done"}
+        checked={isChecked}
       />
       <OpenModalButton
         className="edit-task-modal-button"
@@ -51,7 +55,7 @@ const AllTasks = () => {
   let taskItems;
   if (allTasksArr.length) {
     taskItems = allTasksArr.map((task) => {
-      return <TaskItem key={task.id} task={task} status={task.status} />;
+      return <TaskItem key={task.id} task={task} />;
     });
   }
 

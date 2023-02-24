@@ -35,12 +35,11 @@ const deleteTask = (taskId) => ({
 
 // Get Tasks
 export const getTasksThunk = () => async (dispatch) => {
-  const res = await fetch(`/api/tasks`);
+  const res = await fetch(`/api/tasks/`);
 
   if (res.ok) {
-    const data = await res.json();
-    // console.log('data', data)
-    dispatch(loadTasks(data));
+    const tasks = await res.json();
+    dispatch(loadTasks(tasks));
   } else {
     const data = await res.json();
     if (data.errors) return res;
@@ -83,18 +82,24 @@ export const editTaskThunk = (taskId, taskData) => async (dispatch) => {
 
 // Create Task
 export const createTaskThunk = (task) => async (dispatch) => {
+  console.log('hi', task)
+
   const res = await fetch("/api/tasks", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(task),
   });
-
+  console.log('res', res)
   if (res.ok) {
     const createdTask = await res.json();
+    console.log('createdTask', createdTask)
+
     dispatch(createTask(createdTask));
     return createdTask;
   } else {
     const data = await res.json();
+    console.log('oh no', res)
+
     if (data.errors) return res;
   }
 };
@@ -126,13 +131,8 @@ const tasksReducer = (state = initialState, action) => {
       newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
       return newState
     case EDIT_TASK:
-      newState.allTasks = { ...newState.allTasks };
-      newState.allTasks[action.task.id] = {
-        ...state.allTasks[action.task.id],
-        ...action.task,
-      };
-      newState.singleTask = { ...state.singleTask, ...action.task };
-      return newState;
+      newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
+      return newState
 
     case DELETE_TASK:
       newState.allTasks = { ...state.allTasks }

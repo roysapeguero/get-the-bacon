@@ -33,14 +33,15 @@ def get_task(id):
 
 # Create task by id
 @task_routes.route('/', methods=['POST'])
-@login_required
+# @login_required
 def create_task():
     """
     Creates a task
     """
-
+    print('im herre')
     form = TaskForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print('i made it', task)
 
     if form.validate_on_submit():
         task = Task(
@@ -53,6 +54,8 @@ def create_task():
         created_at = datetime.datetime.now(),
         updated_at = datetime.datetime.now()
         )
+        print('hello', task)
+
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
@@ -71,15 +74,15 @@ def edit_task(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        task = Task(
-            user_id = current_user.id,
-            list_id = form.data['list_id'],
-            name = form.data['name'],
-            notes = form.data['notes'],
-            due = form.data['due'],
-            status = form.data['status'],
-            updated_at = datetime.datetime.now()
-        )
+
+        task.user_id = current_user.id
+        task.list_id = form.data['list_id']
+        task.name = form.data['name']
+        task.notes = form.data['notes']
+        task.due = form.data['due']
+        task.status = 'Not Started'
+        task.updated_at = datetime.datetime.now()
+
         db.session.add(task)
         db.session.commit()
         return task.to_dict()

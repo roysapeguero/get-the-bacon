@@ -9,10 +9,10 @@ const TaskShow = ({ task }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { closeModal } = useModal()
-  const currentTask = useSelector(state => state.Tasks.singleTask)
-  const [name, setName] = useState(currentTask?.name || '')
-  const [due, setDue] = useState(currentTask?.due || '')
-  const [notes, setNotes] = useState(currentTask?.notes || '')
+  const currentUser = useSelector(state => state.session.user)
+  const [name, setName] = useState(task?.name || '')
+  const [due, setDue] = useState(task?.due || '')
+  const [notes, setNotes] = useState(task?.notes || '')
   const [errors, setErrors] = useState([]);
 
   // console.log(currentTask)
@@ -20,19 +20,29 @@ const TaskShow = ({ task }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors([]);
-    console.log(currentTask)
-    dispatch(getTaskThunk())
+    if (task?.name.length) {
+      let editTask = {
+        ...task,
+        name,
+        due,
+        notes,
+      }
+      dispatch(editTaskThunk(task.id, editTask));
+      closeModal();
 
-    let editTask = {
-      ...task,
-      name,
-      due,
-      notes,
-
+    } else {
+      let newTask = {
+        name,
+        due,
+        notes,
+        user_id: currentUser.id,
+        list_id: null,
+        status: 'Not Started'
+      }
+      dispatch(createTaskThunk(newTask))
+      console.log('hiiiiiiii---------')
+      closeModal();
     }
-    const res = dispatch(editTaskThunk(editTask, task.id));
-    closeModal();
-
   }
 
   useEffect(() => {
@@ -80,7 +90,8 @@ const TaskShow = ({ task }) => {
         <div className="todo-action-buttons">
           <button type='button'>Mark Complete</button>
           <button  type='button' onClick={() =>
-            dispatch(deleteTaskThunk(task.id)).then(closeModal())}>
+            // dispatch(deleteTaskThunk(task.id)).then(closeModal()).then(dispatch(() => getTasksThunk()))}>
+            dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
               Delete
           </button>
           <button>Save</button>
