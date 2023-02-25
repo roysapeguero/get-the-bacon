@@ -21,6 +21,7 @@ const createTask = (task) => ({
 
 
 const editTask = (task) => {
+
   return {
     type: EDIT_TASK,
     task
@@ -130,8 +131,10 @@ const tasksReducer = (state = initialState, action) => {
     case CREATE_TASK:
       newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
       return newState
-    case EDIT_TASK:
-      newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
+
+      case EDIT_TASK:
+        newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
+        {console.log('edit me', action.task)}
       return newState
 
     case DELETE_TASK:

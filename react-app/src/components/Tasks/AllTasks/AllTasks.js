@@ -26,14 +26,18 @@ const TaskItem = ({ task, status }) => {
 
   return (
     <div>
-      <input
-        onChange={checkHandler}
-        id="task-name"
-        type="checkbox"
-        checked={isChecked}
-      />
+      <label className="check-box-label">
+        <input
+          onChange={checkHandler}
+          id="task-name"
+          type="checkbox"
+          checked={isChecked}
+          className='check-box'
+        />
+        <span className="fake-checkbox"></span>
+      </label>
       <OpenModalButton
-        className="edit-task-modal-button"
+        className="open-task-modal-button"
         modalComponent={
         <TaskShow task={task} />
         }
@@ -62,20 +66,24 @@ const AllTasks = () => {
   if (!allTasksArr.length) return null;
 
   return (
-    <div className="all-tasks-page-container">
-      <h2 className="all-tasks-header">Tasks</h2>
-      <div className="tasks-container">
-        <ul className="tasks-wrapper">{taskItems}</ul>
+    <div className="all-tasks-container">
+      <div className="task-top-container">
+        <h2 className="all-tasks-header">Tasks</h2>
+        <div className="tasks-container">
+          <ul className="tasks-wrapper">{taskItems}</ul>
+        </div>
       </div>
-      <OpenModalButton
-        className="add-task-modal-button"
-        modalComponent={
-        <TaskShow />
-        }
-        buttonText={<label className="add-task-label" >
-          Add task
-      </label>}
-      />
+      <div className="tasks-button-container">
+        <OpenModalButton
+          className="add-task-modal-button"
+          modalComponent={
+          <TaskShow />
+          }
+          buttonText={<label className="add-task-label" >
+            Add task
+          </label>}
+        />
+      </div>
     </div>
   );
 };

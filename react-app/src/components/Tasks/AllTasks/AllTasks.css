@@ -1,3 +1,61 @@
-.all-tasks-page-container {
+.all-tasks-container {
   margin-top: 150px;
+  /* border: 1px solid red; */
+  margin-left: 50px;
+  min-height: 100vh;
+  width: fit-content;
+  padding: 30px;
+  background-color: rgba(251, 204, 205, 0.715);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+
+.tasks-wrapper {
+  /* border: 1px solid red; */
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.all-tasks-header {
+  color: white;
+}
+
+.open-task-modal-button {
+  background-color: transparent;
+  border:  none;
+  padding: 5px;
+  /* border: 1px solid red; */
+  margin: 8px 0;
+  font-size: 18px;
+  color: white;
+  font-weight: 800;
+
+}
+
+.open-task-modal-button:hover,
+.add-task-modal-button:hover {
+  cursor: pointer;
+}
+
+.add-task-modal-button {
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  padding: 7px;
+  font-weight: 800;
+  color: rgba(251, 204, 205, 0.715);
+  border-radius: 10px;
+}
+
+.tasks-button-container {
+  display: flex;
+  justify-content: flex-end;
+  /* border: 1px solid red; */
+
 }
