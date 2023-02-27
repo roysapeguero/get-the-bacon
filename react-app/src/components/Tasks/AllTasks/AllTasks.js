@@ -45,9 +45,7 @@ const AllTasks = () => {
           modalComponent={
           <CreateTask />
           }
-          buttonText={<label className="add-task-label" >
-            Add task
-          </label>}
+          buttonText='Add Task'
         />
       </div>
     </div>

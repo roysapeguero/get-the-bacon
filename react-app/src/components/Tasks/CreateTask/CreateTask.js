@@ -74,7 +74,7 @@ const CreateTask = () => {
           </div>
         </div>
         <div className="todo-notes">
-          <label htmlFor="todo-notes-text">Notes</label>
+          <label className="todo-notes-text" htmlFor="todo-notes-text">Notes</label>
           <textarea
             className='input-item text-big'
             name="todo-notes"
@@ -91,7 +91,7 @@ const CreateTask = () => {
             dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
               Delete
           </button> */}
-          <button type="submit">Save</button>
+          <button className='todo-button' type="submit">Save</button>
         </div>
       </form>
     </div>

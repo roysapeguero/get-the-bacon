@@ -2,10 +2,9 @@ import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import TaskShow from "../TaskShow/TaskShow";
 import OpenModalButton from "../../OpenModalButton";
-import { getTaskThunk } from "../../../store/tasks";
+import './TaskItem.css'
 
-const TaskItem = ({ task, taskId }) => {
-  const dispatch = useDispatch()
+const TaskItem = ({ task }) => {
   const [isChecked, setIsChecked] = useState(false)
 
   useEffect(() => {
@@ -13,24 +12,19 @@ const TaskItem = ({ task, taskId }) => {
     if (storedCheckboxState !== null) {
       setIsChecked(JSON.parse(storedCheckboxState));
     }
-  }, [taskId]);
+  }, [task.id]);
 
   useEffect(() => {
-    localStorage.setItem(`checkbox-${taskId}`, JSON.stringify(isChecked));
-  }, [taskId, isChecked]);
+    localStorage.setItem(`checkbox-${task.id}`, JSON.stringify(isChecked));
+  }, [task.id, isChecked]);
 
   const checkHandler = () => {
     setIsChecked(!isChecked)
   }
 
-  // useEffect(() => {
-  //   dispatch(getTaskThunk(taskId));
-  // }, [dispatch, taskId]);
-
-
   return (
-    <div>
-      <label className="check-box-label">
+    <div className="check-name-item">
+      <label htmlFor="task-name" className="check-box-label">
         <input
           onChange={checkHandler}
           id="task-name"
@@ -38,7 +32,7 @@ const TaskItem = ({ task, taskId }) => {
           checked={isChecked}
           className='check-box'
         />
-        <span className="fake-checkbox"></span>
+        {/* <span className="fake-checkbox"></span> */}
       </label>
       <OpenModalButton
         className="open-task-modal-button"

@@ -52,7 +52,6 @@ const TaskShow = ({ task }) => {
 				</ul>
         <h1 className="modal-form-title">Task Details</h1>
         <div className="todo-title-duedate">
-          {/* <label className="todo-task-name">{task.name}</label> */}
           <input
             className="todo-task-name"
             type='text'
@@ -71,7 +70,7 @@ const TaskShow = ({ task }) => {
           </div>
         </div>
         <div className="todo-notes">
-          <label htmlFor="todo-notes-text">Notes</label>
+          <label className="todo-notes-text" htmlFor="todo-notes-text">Notes</label>
           <textarea
             className='input-item text-big'
             name="todo-notes"
@@ -82,12 +81,12 @@ const TaskShow = ({ task }) => {
           ></textarea>
         </div>
         <div className="todo-action-buttons">
-          <button type='button'>Mark Complete</button>
-          <button  type='button' onClick={() =>
+          {/* <button className='todo-button' type='button'>Mark Complete</button> */}
+          <button className='todo-button' type='button' onClick={() =>
             dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
               Delete
           </button>
-          <button type="submit">Save</button>
+          <button className='todo-button' type="submit">Save</button>
         </div>
       </form>
     </div>
