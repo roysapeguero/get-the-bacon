@@ -10,12 +10,12 @@ class Task(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")))
     name = db.Column(db.String(200), nullable=False)
     notes = db.Column(db.String(2000))
     due = db.Column(db.String)
-    status = db.Column(db.String, nullable=False)
+    status = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 

@@ -4,46 +4,50 @@ const CREATE_TASK = "tasks/CREATE_TASK";
 const EDIT_TASK = "tasks/EDIT_TASK";
 const DELETE_TASK = "tasks/DELETE_TASK";
 
-export const loadTasks = (tasks) => ({
-  type: GET_TASKS,
-  tasks,
-});
+const loadTasks = (tasks) => {
+  return {
+    type: GET_TASKS,
+    payload: tasks
+  }
+};
 
-const loadTask = (task) => ({
-  type: GET_TASK,
-  task,
-  });
+const loadTask = (task) => {
+  return {
+    type: GET_TASK,
+    payload: task
+  }
+};
 
-const createTask = (task) => ({
-  type: CREATE_TASK,
-  task,
-});
+const createTask = (task) => {
+  return {
+    type: CREATE_TASK,
+    payload: task,
+  }
+};
 
 
 const editTask = (task) => {
-
   return {
     type: EDIT_TASK,
-    task
+    payload: task
   };
 };
 
-const deleteTask = (taskId) => ({
-  type: DELETE_TASK,
-  taskId,
-});
+const deleteTask = (taskId) => {
+  return {
+    type: DELETE_TASK,
+    payload: taskId
+  }
+};
 
 
 // Get Tasks
 export const getTasksThunk = () => async (dispatch) => {
-  const res = await fetch(`/api/tasks/`);
+  const res = await fetch(`/api/tasks`);
 
   if (res.ok) {
-    const tasks = await res.json();
-    dispatch(loadTasks(tasks));
-  } else {
     const data = await res.json();
-    if (data.errors) return res;
+    dispatch(loadTasks(data));
   }
 };
 
@@ -52,56 +56,47 @@ export const getTaskThunk = (taskId) => async (dispatch) => {
   const res = await fetch(`/api/tasks/${taskId}`);
 
   if (res.ok) {
-    const task = await res.json();
-    dispatch(loadTask(task));
-  } else {
     const data = await res.json();
-    if (data.errors) return res
+    dispatch(loadTask(data));
   }
 };
 
 // Edit
-export const editTaskThunk = (taskId, taskData) => async (dispatch) => {
+export const editTaskThunk = (task, taskId) => async (dispatch) => {
+  console.log('hello', task, taskId)
   const res = await fetch(`/api/tasks/${taskId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(taskData),
+    body: JSON.stringify(task),
   });
   if (res.ok) {
-    const task = await res.json();
-    dispatch(editTask(task));
-    // dispatch(getTaskThunk(task.id));
-  } else {
     const data = await res.json();
-    if (data.errors) {
-      return res;
-    }
+    dispatch(editTask(data));
+    return data
   }
 };
 
 // Create Task
 export const createTaskThunk = (task) => async (dispatch) => {
-  console.log('hi', task)
-
-  const res = await fetch("/api/tasks", {
+  console.log('task at thunk ', task)
+  const res = await fetch("/api/tasks/", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(task),
   });
-  console.log('res', res)
+  console.log('res at thunk ', res)
+
   if (res.ok) {
-    const createdTask = await res.json();
-    console.log('createdTask', createdTask)
+    console.log('res ok ', res)
 
-    dispatch(createTask(createdTask));
-    return createdTask;
-  } else {
-    const data = await res.json();
-    console.log('oh no', res)
-
-    if (data.errors) return res;
+    const task = await res.json();
+    dispatch(createTask(task));
+    console.log('task create', task)
+    return task
   }
 };
 
@@ -109,37 +104,51 @@ export const createTaskThunk = (task) => async (dispatch) => {
 // Delete Task
 export const deleteTaskThunk = (taskId) => async (dispatch) => {
   const res = await fetch(`/api/tasks/${taskId}`, {
-    method: "DELETE",
+    method: "DELETE"
   });
 
   if (res.ok) {
+    const data = await res.json()
     dispatch(deleteTask(taskId));
+    return data
   }
 };
 
 const initialState = { allTasks: {}, singleTask: {}}
 
 const tasksReducer = (state = initialState, action) => {
-  let newState = { ...state };
+  let newState;
   switch (action.type) {
     case GET_TASKS:
-      newState = { ...state };
-      newState.allTasks = action.tasks;
-      return newState;
+      newState = {...state}
+      action.payload.forEach(task => {
+        newState.allTasks[task.id] = task
+      })
+      return newState
     case GET_TASK:
-      return { ...state, singleTask: action.task };
+      newState = {...state, singleTask: {...state.singleTask, ...action.payload}}
+      return newState
+
+    case EDIT_TASK:
+      newState = {
+        ...state,
+        allTasks: {
+          ...state.allTasks, [action.payload.id]: {
+            ...state.allTasks[action.payload.id],
+            ...action.payload
+          },
+        },
+        singleTask: {...state.group}
+      }
     case CREATE_TASK:
-      newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
+      newState = {...state, allTasks: {...state.allTasks}}
+      newState.allTasks[action.payload.id] = action.payload
+      console.log(action.payload)
+      console.log(newState)
       return newState
-
-      case EDIT_TASK:
-        newState.allTasks = {...state.allTasks, [action.task.id]: action.task}
-        {console.log('edit me', action.task)}
-      return newState
-
     case DELETE_TASK:
-      newState.allTasks = { ...state.allTasks }
-      delete newState.allTasks[action.taskId]
+      newState = { ...state, allTasks: {...state.allTasks} }
+      delete newState.allTasks[action.payload]
       return newState
     default:
       return state

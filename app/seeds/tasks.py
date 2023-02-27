@@ -22,8 +22,8 @@ def seed_tasks():
         created_at = datetime.now(),
         updated_at = datetime.now() )
     task_3 =  Task(
-        user_id=2,
-        list_id=1,
+        user_id=1,
+        list_id=3,
         name='Finish Project',
         notes='If I never start I\'ll never finish!',
         due='Sat Mar 11 2023 18:00:00',

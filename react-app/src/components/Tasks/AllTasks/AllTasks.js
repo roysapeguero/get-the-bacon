@@ -1,68 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasksThunk, editTaskThunk, getTaskThunk, deleteTaskThunk } from "../../../store/tasks";
+import { getTasksThunk, getTaskThunk } from "../../../store/tasks";
 import "./AllTasks.css";
 import OpenModalButton from "../../OpenModalButton";
 import TaskShow from "../TaskShow/TaskShow";
+import TaskItem from "../TaskItem/TaskItem";
+import CreateTask from "../CreateTask/CreateTask";
 
-const TaskItem = ({ task, status }) => {
-  const dispatch = useDispatch()
-  const [isChecked, setIsChecked] = useState(false)
-
-  useEffect(() => {
-    const storedCheckboxState = localStorage.getItem(`checkbox-${task.id}`);
-    if (storedCheckboxState !== null) {
-      setIsChecked(JSON.parse(storedCheckboxState));
-    }
-  }, [task.id]);
-
-  const checkHandler = () => {
-    setIsChecked(!isChecked)
-  }
-
-  useEffect(() => {
-    localStorage.setItem(`checkbox-${task.id}`, JSON.stringify(isChecked));
-  }, [task.id, isChecked]);
-
-  return (
-    <div>
-      <label className="check-box-label">
-        <input
-          onChange={checkHandler}
-          id="task-name"
-          type="checkbox"
-          checked={isChecked}
-          className='check-box'
-        />
-        <span className="fake-checkbox"></span>
-      </label>
-      <OpenModalButton
-        className="open-task-modal-button"
-        modalComponent={
-        <TaskShow task={task} />
-        }
-        buttonText={task.name}
-      />
-    </div>
-  );
-};
 
 const AllTasks = () => {
   const dispatch = useDispatch();
   const allTasks = useSelector((state) => state.Tasks.allTasks);
-  const allTasksArr = allTasks ? Object.values(allTasks) : [];
+  const allTasksArr = Object.values(allTasks);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    dispatch(getTasksThunk());
+    dispatch(getTasksThunk(allTasks)).then(() =>{
+      setIsLoaded(true)
+    });
   }, [dispatch]);
 
+
   let taskItems;
-  if (allTasksArr.length) {
+  if (Object.values(allTasks).length) {
     taskItems = allTasksArr.map((task) => {
-      return <TaskItem key={task.id} task={task} />;
+      return <TaskItem key={task.id} task={task} taskId={task.id} />;
     });
   }
 
+  // if (!Object.values(allTasks).length) return null;
   if (!allTasksArr.length) return null;
 
   return (
@@ -77,7 +43,7 @@ const AllTasks = () => {
         <OpenModalButton
           className="add-task-modal-button"
           modalComponent={
-          <TaskShow />
+          <CreateTask />
           }
           buttonText={<label className="add-task-label" >
             Add task

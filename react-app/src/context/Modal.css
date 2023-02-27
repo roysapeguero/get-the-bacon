@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 #modal-background {
@@ -21,4 +22,35 @@
 #modal-content {
   position: absolute;
   background-color:white;
+  border-radius: 8px;
+  max-height: 80%;
+  overflow: scroll;
+  width: 500px;
+}
+
+.errors-container {
+  width: 90%;
+  text-align: center;
+  align-items: center;
+}
+
+.errors {
+  width: 90%;
+  color: red;
+}
+
+form {
+  display: block;
+  width: 90%;
+  margin: 30px;
+  align-items: center;
+}
+
+
+.modal-form-title {
+  text-align: center;
+  font-size: 28px;
+  color: rgba(251, 164, 165, 0.835);
+
+
 }

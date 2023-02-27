@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { deleteTaskThunk, editTaskThunk, createTaskThunk, getTaskThunk, getTasksThunk } from "../../../store/tasks"
 import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
-import './TaskShow.css'
-// import { loadTasks } from "../../../store/tasks"
+import './CreateTask.css'
 
-const TaskShow = ({ task }) => {
+const CreateTask = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const { closeModal } = useModal()
-  const currentTask = useSelector(state => state.Tasks.singleTask)
-  const [name, setName] = useState(task?.name || 'Task Name')
-  const [due, setDue] = useState(task?.due || '')
-  const [notes, setNotes] = useState(task?.notes || '')
+  const user = useSelector(state => state.session.user)
+  let allTasks = useSelector(state => state.Tasks.allTasks)
+  const [name, setName] = useState('Task Name')
+  const [due, setDue] = useState('')
+  const [notes, setNotes] = useState('')
   const [errors, setErrors] = useState([]);
 
 
@@ -20,26 +21,28 @@ const TaskShow = ({ task }) => {
     e.preventDefault()
     setErrors([]);
     return dispatch(
-      editTaskThunk(
-        {
-          ...currentTask,
-          name,
-          due,
-          notes,
-        },
-        currentTask.id
-      )
+      createTaskThunk({
+        name,
+        due,
+        notes,
+        user_id: user.id,
+        list_id: 1,
+
+      })
     )
-    .then(task => dispatch(getTaskThunk(task.id)))
+    // .then(history.push(`/`))
+    // .then(dispatch(getTasksThunk(allTasks)))
     .then(closeModal)
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(Object.values(data.errors));
-    });
-  }
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(Object.values(data.errors));
+      });
+    }
+
+
 
   useEffect(() => {
-      dispatch(getTaskThunk(task.id));
+      dispatch(getTasksThunk());
   }, [dispatch]);
 
   return (
@@ -82,11 +85,12 @@ const TaskShow = ({ task }) => {
           ></textarea>
         </div>
         <div className="todo-action-buttons">
-          <button type='button'>Mark Complete</button>
+          {/* <button type='button'>Mark Complete</button>
           <button  type='button' onClick={() =>
+            // dispatch(deleteTaskThunk(task.id)).then(closeModal()).then(dispatch(() => getTasksThunk()))}>
             dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
               Delete
-          </button>
+          </button> */}
           <button type="submit">Save</button>
         </div>
       </form>
@@ -94,4 +98,5 @@ const TaskShow = ({ task }) => {
   )
 }
 
-export default TaskShow
+
+export default CreateTask;

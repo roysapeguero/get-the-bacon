@@ -1,0 +1,28 @@
+.todo-title-duedate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.todo-task-name,
+.todo-due-date,
+.todo-due-date-input {
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(251, 164, 165, 0.835);
+
+}
+
+.todo-task-name:focus {
+  border: none;
+  outline: none;
+}
+
+.todo-due-date-input {
+  font-size: 18px;
+  /* border: 1px solid red; */
+  width: 100px;
+  /* font-weight: 700;
+  color: rgba(251, 164, 165, 0.835); */
+}

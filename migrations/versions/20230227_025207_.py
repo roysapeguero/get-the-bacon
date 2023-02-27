@@ -1,19 +1,18 @@
 """empty message
 
-Revision ID: 99c3a087e284
+Revision ID: 972a405c2f2d
 Revises:
-Create Date: 2023-02-24 05:30:37.025480
+Create Date: 2023-02-27 02:52:07.775012
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '99c3a087e284'
+revision = '972a405c2f2d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,10 +36,10 @@ def upgrade():
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('lists',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=200), nullable=False),
     sa.Column('notes', sa.String(length=2000), nullable=True),
-    sa.Column('status', sa.String(), nullable=False),
+    sa.Column('status', sa.String(), nullable=True),
     sa.Column('due', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -51,12 +50,12 @@ def upgrade():
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('tasks',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('list_id', sa.Integer(), nullable=True),
     sa.Column('name', sa.String(length=200), nullable=False),
     sa.Column('notes', sa.String(length=2000), nullable=True),
     sa.Column('due', sa.String(), nullable=True),
-    sa.Column('status', sa.String(), nullable=False),
+    sa.Column('status', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['list_id'], ['lists.id'], ),
