@@ -1,50 +1,36 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteTaskThunk, editTaskThunk, createTaskThunk, getTaskThunk, getTasksThunk } from "../../../store/tasks"
+import { deleteListThunk, editListThunk, createListThunk, getListThunk, getListsThunk } from "../../../store/lists"
 import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
-import './CreateTask.css'
-import { editListThunk, getListsThunk } from "../../../store/lists"
+import './CreateList.css'
 
-const CreateTask = () => {
+const CreateList = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { closeModal } = useModal()
   const user = useSelector(state => state.session.user)
-
-  const allLists = useSelector(state => state.Lists.allLists)
-  const allListsArr = Object.values(allLists);
-
-  const [name, setName] = useState('Task Name')
+  let allLists = useSelector(state => state.Lists.allLists)
+  const [name, setName] = useState('List Name')
   const [due, setDue] = useState('')
   const [notes, setNotes] = useState('')
-  const [listId, setListId] = useState(1)
   const [errors, setErrors] = useState([]);
 
-  let listItems;
-  if (Object.values(allLists).length) {
-    listItems = allListsArr.map((list) => {
-      return [list.name, list.id]
-    });
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors([]);
     return dispatch(
-      createTaskThunk({
+      createListThunk({
         name,
         due,
         notes,
         user_id: user.id,
-        list_id: listId
-
       })
     )
-    .then(() => {
-      dispatch(getTasksThunk());
-      closeModal();
-    })
+    // .then(history.push(`/`))
+    // .then(dispatch(getTasksThunk(allTasks)))
+    .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(Object.values(data.errors));
@@ -54,8 +40,7 @@ const CreateTask = () => {
 
 
   useEffect(() => {
-      dispatch(getTasksThunk());
-      dispatch(getListsThunk(listId));
+      dispatch(getListsThunk());
   }, [dispatch]);
 
   return (
@@ -70,7 +55,7 @@ const CreateTask = () => {
         <div className="todo-title-duedate">
           {/* <label className="todo-task-name">{task.name}</label> */}
           <input
-            className="todo-task-name"
+            className="todo-list-name"
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -98,18 +83,12 @@ const CreateTask = () => {
           ></textarea>
         </div>
         <div className="todo-action-buttons">
-          <label>List: </label>
-          <select
-            name='list'
-            value={listId}
-            onChange={(e) => setListId(e.target.value)}
-          >
-            {listItems.map((list) => (
-              <option key={list[1]} value={list[1]}>
-                {list[0]}
-              </option>
-            ))}
-          </select>
+          {/* <button type='button'>Mark Complete</button>
+          <button  type='button' onClick={() =>
+            // dispatch(deleteTaskThunk(task.id)).then(closeModal()).then(dispatch(() => getTasksThunk()))}>
+            dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
+              Delete
+          </button> */}
           <button className='todo-button' type="submit">Save</button>
         </div>
       </form>
@@ -118,4 +97,4 @@ const CreateTask = () => {
 }
 
 
-export default CreateTask;
+export default CreateList;

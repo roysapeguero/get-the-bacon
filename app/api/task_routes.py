@@ -47,7 +47,7 @@ def create_task():
         print('herro--------------------sub')
         task = Task(
         user_id = current_user.id,
-        list_id = 1,
+        list_id = form.data['list_id'],
         name = form.data['name'],
         notes = form.data['notes'],
         due = form.data['due'],

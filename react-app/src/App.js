@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AllTasks from "./components/Tasks/AllTasks/AllTasks";
 import SplashPage from "./components/SplashPage/SplashPage";
+import HomePage from "./components/HomePage/HomePage";
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route exact path="/">
-            {user ? <AllTasks /> : <SplashPage />}
+            {user ? <HomePage /> : <SplashPage />}
           </Route>
         </Switch>
       )}

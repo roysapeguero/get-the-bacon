@@ -1,0 +1,39 @@
+.all-lists-container {
+  margin-top: 150px;
+  /* border: 1px solid red; */
+  margin-left: 50px;
+  min-height: 80vh;
+  width: fit-content;
+  padding: 30px;
+  background-color: rgba(251, 204, 205, 0.715);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+
+.all-lists-header {
+  color: white;
+}
+
+.lists-wrapper {
+  /* border: 1px solid red; */
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.add-list-modal-button {
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  padding: 7px;
+  font-weight: 800;
+  color: rgba(251, 204, 205, 0.715);
+  border-radius: 6px;
+
+}

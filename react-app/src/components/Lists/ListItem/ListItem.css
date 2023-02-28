@@ -1,0 +1,15 @@
+.open-list-modal-button {
+  margin: 10px 20px;
+  border: none;
+  /* border: 1px solid red; */
+  background-color: transparent;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  width: 150px;
+  text-align: left;
+}
+
+.open-list-modal-button:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,29 @@
+
+
+
+/*.splash-page-left {
+  background-color: #8C2B34;
+  height: 100%;
+  width: 100%;
+  border: 1px solid red;
+}
+
+.splash-page-right {
+  height: 100%;
+  width: 100%;
+  border: 1px solid red;
+} */
+
+
+.splash-page-container {
+  height: 100vh;
+  margin: 0;
+  background-color: rgb(208, 144, 153);
+
+}
+
+.person-image {
+  margin-top: 200px;
+  width: 400px;
+  height: 500px;
+}

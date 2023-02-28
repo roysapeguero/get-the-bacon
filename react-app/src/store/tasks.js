@@ -138,13 +138,15 @@ const tasksReducer = (state = initialState, action) => {
             ...action.payload
           },
         },
-        singleTask: {...state.group}
+        singleTask: {
+          ...state.task,
+          ...action.payload
+        }
       }
+      return newState
     case CREATE_TASK:
       newState = {...state, allTasks: {...state.allTasks}}
       newState.allTasks[action.payload.id] = action.payload
-      console.log(action.payload)
-      console.log(newState)
       return newState
     case DELETE_TASK:
       newState = { ...state, allTasks: {...state.allTasks} }

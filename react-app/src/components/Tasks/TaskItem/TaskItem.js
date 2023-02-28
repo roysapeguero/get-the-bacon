@@ -35,9 +35,9 @@ const TaskItem = ({ task }) => {
         {/* <span className="fake-checkbox"></span> */}
       </label>
       <OpenModalButton
-        className="open-task-modal-button"
+        className="open-task-modal-button list"
         modalComponent={
-        <TaskShow editTask={true} task={task}/>
+        <TaskShow task={task}/>
         }
         buttonText={task.name}
       />

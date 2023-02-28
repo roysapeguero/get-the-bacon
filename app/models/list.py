@@ -19,7 +19,7 @@ class List(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     users = db.relationship("User", back_populates = "lists")
-    tasks = db.relationship("Task", back_populates = "lists")
+    tasks = db.relationship("Task", back_populates = "lists", cascade="all, delete")
 
 
     def to_dict(self):
@@ -32,5 +32,6 @@ class List(db.Model):
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'tasks': [task.to_dict() for task in self.tasks]
             # 'user': self.user.to_dict()
         }
