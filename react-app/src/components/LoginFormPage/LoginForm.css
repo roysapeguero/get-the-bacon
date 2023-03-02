@@ -1,0 +1,32 @@
+.login-page-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 200px;
+}
+
+
+
+.login-left-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #D09099;
+  height: 100vh;
+}
+
+.login-left-top {
+  border: 1px solid red;
+}
+
+.login-right-container {
+  width: 50%;
+
+}
+
+.login-form-item {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

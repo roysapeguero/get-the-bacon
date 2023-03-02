@@ -11,6 +11,7 @@ import HomePage from "./components/HomePage/HomePage";
 
 
 function App() {
+
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {

@@ -2,7 +2,7 @@ const GET_LISTS = "lists/GET_LISTS";
 const GET_LIST = "lists/GET_LIST";
 const CREATE_LIST = "lists/CREATE_LIST";
 const EDIT_LIST = "lists/EDIT_LIST";
-const DELETE_LIST = "lists/DELETE_TASK";
+const DELETE_LIST = "lists/DELETE_LIST";
 
 const loadLists = (lists) => {
   return {
@@ -113,44 +113,33 @@ export const deleteListThunk = (listId) => async (dispatch) => {
 const initialState = { allLists: {}, singleList: {}}
 
 const listsReducer = (state = initialState, action) => {
-  let newState;
+  let newState = { allLists: { ...state.allLists }, singleList: {...state.singleList} };
   switch (action.type) {
     case GET_LISTS:
       newState = {...state}
-      action.payload.forEach(list => {
-        newState.allLists[list.id] = list
-      })
+      newState.allLists = action.payload
       return newState
-    case GET_LIST:
-      newState = {...state, singleList: { ...state.singleList, ...action.payload }}
-      return newState
-      case EDIT_LIST:
-        newState = {
-          ...state,
-          allLists: {
-            ...state.allLists,
-            [action.payload.id]: {
-              ...state.allLists[action.payload.id],
-              ...action.payload,
-            },
-          },
-          singleList: {
-            ...state.singleList,
-            ...action.payload,
-          },
-        };
-        newState.allLists[action.payload.id] = action.payload
 
-        return newState;
+    case GET_LIST:
+      newState.singleList = action.payload
+      newState.singleList.tasks = {...action.payload.tasks}
+      return newState
+      // return { ...state, singleList: action.payload }
+
+    case EDIT_LIST:
+      newState.allLists = {...newState.allLists, [action.payload.id]: action.payload}
+      newState.singleList = {...state.singleList, ...action.payload}
+      return newState
+
     case CREATE_LIST:
-      newState = {...state, allLists: {...state.allLists}}
-      newState.allLists[action.payload.id] = action.payload
+      newState.allLists = {...state.allLists, [action.payload.id]: action.payload}
       return newState
+
     case DELETE_LIST:
-      newState = { ...state }
-      newState.allLists = { ...state.allLists };
       delete newState.allLists[action.payload]
+      newState.singleList = {}
       return newState
+
     default:
       return state
   }

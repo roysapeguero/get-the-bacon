@@ -4,6 +4,7 @@ import { deleteTaskThunk, editTaskThunk, createTaskThunk, getTaskThunk, getTasks
 import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
 import './TaskShow.css'
+import { getListsThunk } from "../../../store/lists"
 // import { loadTasks } from "../../../store/tasks"
 
 const TaskShow = ({ task }) => {
@@ -30,7 +31,7 @@ const TaskShow = ({ task }) => {
         currentTask.id
       )
     )
-    .then(task => dispatch(getTaskThunk(task.id)))
+    // .then(task => dispatch(getTaskThunk(task.id)))
     .then(closeModal)
     .catch(async (res) => {
       const data = await res.json();
@@ -83,7 +84,7 @@ const TaskShow = ({ task }) => {
         <div className="todo-action-buttons">
           {/* <button className='todo-button' type='button'>Mark Complete</button> */}
           <button className='todo-button' type='button' onClick={() =>
-            dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
+            dispatch(deleteTaskThunk(task.id)).then(() => closeModal()).then(dispatch(getTasksThunk())).then(dispatch(getListsThunk()))}>
               Delete
           </button>
           <button className='todo-button' type="submit">Save</button>

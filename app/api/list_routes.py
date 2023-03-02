@@ -14,7 +14,7 @@ def get_all_lists():
     Query for all lists and returns them in a list of task dictionaries
     """
     lists = List.query.all()
-    return [list.to_dict() for list in lists]
+    return {list.id: list.to_dict() for list in lists}
 
 # Get list by id
 @list_routes.route('/<int:id>')

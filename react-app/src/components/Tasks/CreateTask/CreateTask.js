@@ -4,7 +4,7 @@ import { deleteTaskThunk, editTaskThunk, createTaskThunk, getTaskThunk, getTasks
 import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
 import './CreateTask.css'
-import { editListThunk, getListsThunk } from "../../../store/lists"
+import { editListThunk, getListsThunk, getListThunk } from "../../../store/lists"
 
 const CreateTask = () => {
   const dispatch = useDispatch()
@@ -24,14 +24,19 @@ const CreateTask = () => {
   let listItems;
   if (Object.values(allLists).length) {
     listItems = allListsArr.map((list) => {
-      return [list.name, list.id]
+      return [list.name, list.id, list]
     });
   }
 
-  const handleSubmit = (e) => {
+  let itemIdx;
+  listItems.forEach((item, idx) => {
+    if (listId && item[1] == listId) itemIdx = idx
+  })
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors([]);
-    return dispatch(
+    return await dispatch(
       createTaskThunk({
         name,
         due,
@@ -43,6 +48,7 @@ const CreateTask = () => {
     )
     .then(() => {
       dispatch(getTasksThunk());
+      dispatch(getListsThunk());
       closeModal();
     })
       .catch(async (res) => {
@@ -55,7 +61,7 @@ const CreateTask = () => {
 
   useEffect(() => {
       dispatch(getTasksThunk());
-      dispatch(getListsThunk(listId));
+      // dispatch(getListThunk(listId));
   }, [dispatch]);
 
   return (

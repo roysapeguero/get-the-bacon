@@ -15,7 +15,7 @@ const AllLists = () => {
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    dispatch(getListsThunk(allLists)).then(() =>{
+    dispatch(getListsThunk()).then(() =>{
       setIsLoaded(true)
     });
   }, [dispatch]);

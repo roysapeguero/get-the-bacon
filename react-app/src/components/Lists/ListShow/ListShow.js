@@ -5,13 +5,16 @@ import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
 import './ListShow.css'
 import TaskItem from "../../Tasks/TaskItem/TaskItem"
+import { getTasksThunk } from "../../../store/tasks"
 // import { loadTasks } from "../../../store/tasks"
 
 const ListShow = ({ list }) => {
   const dispatch = useDispatch()
   const { closeModal } = useModal()
   const currentList = useSelector(state => state.Lists.singleList)
-  const [name, setName] = useState(list?.name || 'List Name')
+
+  const [taskItems, setTaskItems] = useState([])
+  const [name, setName] = useState(list?.name || 'list Name')
   const [due, setDue] = useState(list?.due || '')
   const [notes, setNotes] = useState(list?.notes || '')
   const [errors, setErrors] = useState([]);
@@ -31,7 +34,7 @@ const ListShow = ({ list }) => {
         currentList.id
       )
     )
-    .then(list => dispatch(getListThunk(list.id)))
+    .then(dispatch(getListThunk(currentList.id)))
     .then(closeModal)
     .catch(async (res) => {
       const data = await res.json();
@@ -43,12 +46,14 @@ const ListShow = ({ list }) => {
       dispatch(getListThunk(list.id));
   }, [dispatch]);
 
-  let taskItems;
-  if (Object.values(list.tasks).length) {
-    taskItems = list.tasks.map((task) => {
-      return <TaskItem key={task.id} task={task} taskId={task.id} />;
-    });
-  }
+  useEffect(() => {
+    if (currentList.id && Object.values(currentList.tasks).length) {
+      setTaskItems(Object.values(currentList.tasks).map((task) => {
+          return <TaskItem key={task.id} task={task} taskId={task.id} />;
+        })
+      )
+    }
+  }, [currentList]);
 
   return (
     <div>
@@ -92,9 +97,10 @@ const ListShow = ({ list }) => {
           ></textarea>
         </div>
         <div className="todo-action-buttons">
+
           {/* <button className='todo-button' type='button'>Mark Complete</button> */}
           <button className='todo-button' type='button' onClick={() =>
-            dispatch(deleteListThunk(list.id)).then(() => closeModal())}>
+            dispatch(deleteListThunk(list.id)).then(() => closeModal()).then(dispatch(getTasksThunk()))}>
               Delete
           </button>
           <button className='todo-button' type="submit">Save</button>

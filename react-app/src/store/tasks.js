@@ -117,41 +117,31 @@ export const deleteTaskThunk = (taskId) => async (dispatch) => {
 const initialState = { allTasks: {}, singleTask: {}}
 
 const tasksReducer = (state = initialState, action) => {
-  let newState;
+  // let newState = { allTasks: { ...state.allTasks }, singleTask: {...state.singleTask} }
+  let newState = { ...state}
   switch (action.type) {
     case GET_TASKS:
       newState = {...state}
-      action.payload.forEach(task => {
-        newState.allTasks[task.id] = task
-      })
-      return newState
-    case GET_TASK:
-      newState = {...state, singleTask: {...state.singleTask, ...action.payload}}
+      newState.allTasks = action.payload
       return newState
 
+    case GET_TASK:
+      return { ...state, singleTask: action.payload }
+
     case EDIT_TASK:
-      newState = {
-        ...state,
-        allTasks: {
-          ...state.allTasks, [action.payload.id]: {
-            ...state.allTasks[action.payload.id],
-            ...action.payload
-          },
-        },
-        singleTask: {
-          ...state.task,
-          ...action.payload
-        }
-      }
+      newState.allTasks = {...newState.allTasks, [action.payload.id]: {...state.allTasks[action.payload.id], ...action.payload}}
+      newState.singleTask = {...newState.singleTask, ...action.payload}
       return newState
+
     case CREATE_TASK:
-      newState = {...state, allTasks: {...state.allTasks}}
-      newState.allTasks[action.payload.id] = action.payload
+      newState.allTasks = { [action.payload.id]: action.payload}
       return newState
+
     case DELETE_TASK:
-      newState = { ...state, allTasks: {...state.allTasks} }
+      newState.singleTask = {}
       delete newState.allTasks[action.payload]
       return newState
+
     default:
       return state
   }

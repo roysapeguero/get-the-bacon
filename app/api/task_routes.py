@@ -14,7 +14,7 @@ def get_all_tasks():
     Query for all tasks and returns them in a list of task dictionaries
     """
     tasks = Task.query.all()
-    return [task.to_dict() for task in tasks]
+    return {task.id: task.to_dict() for task in tasks}
 
 # Get task by id
 @task_routes.route('/<int:id>')

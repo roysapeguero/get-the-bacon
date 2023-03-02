@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -52,19 +53,27 @@ function ProfileButton({ user }) {
             </li>
           </>
         ) : (
-          <>
-            <OpenModalButton
-              buttonText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
+          <div>
+            <NavLink to='/login'>
+              Login
+            </NavLink>
+            <NavLink to='/signup'>
+              Sign up
+            </NavLink>
+          </div>
+          // <>
+          //   <OpenModalButton
+          //     buttonText="Log In"
+          //     onItemClick={closeMenu}
+          //     modalComponent={<LoginFormModal />}
+          //   />
 
-            <OpenModalButton
-              buttonText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-          </>
+          //   <OpenModalButton
+          //     buttonText="Sign Up"
+          //     onItemClick={closeMenu}
+          //     modalComponent={<SignupFormModal />}
+          //   />
+          // </>
         )}
       </ul>
     </>
