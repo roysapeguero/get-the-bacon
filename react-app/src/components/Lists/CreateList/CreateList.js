@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteListThunk, editListThunk, createListThunk, getListThunk, getListsThunk } from "../../../store/lists"
+import { createListThunk, getListsThunk } from "../../../store/lists"
 import { useModal } from "../../../context/Modal"
-import { useHistory } from "react-router-dom"
 import './CreateList.css'
 
 const CreateList = () => {
   const dispatch = useDispatch()
-  const history = useHistory()
+  // const history = useHistory()
   const { closeModal } = useModal()
   const user = useSelector(state => state.session.user)
-  let allLists = useSelector(state => state.Lists.allLists)
+  // let allLists = useSelector(state => state.Lists.allLists)
   const [name, setName] = useState('')
   // const [due, setDue] = useState('')
   const [notes, setNotes] = useState('')

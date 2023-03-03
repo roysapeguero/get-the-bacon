@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { deleteTaskThunk, editTaskThunk, createTaskThunk, getTaskThunk, getTasksThunk } from "../../../store/tasks"
+import { createTaskThunk, getTasksThunk } from "../../../store/tasks"
 import { useModal } from "../../../context/Modal"
-import { useHistory } from "react-router-dom"
+// import { useHistory } from "react-router-dom"
 import './CreateTask.css'
-import { editListThunk, getListsThunk, getListThunk } from "../../../store/lists"
+import { getListsThunk } from "../../../store/lists"
 
 const CreateTask = () => {
   const dispatch = useDispatch()
-  const history = useHistory()
+  // const history = useHistory()
   const { closeModal } = useModal()
   const user = useSelector(state => state.session.user)
 
@@ -28,10 +28,10 @@ const CreateTask = () => {
   const [errors, setErrors] = useState([]);
 
 
-  let itemIdx;
-  listItems?.forEach((item, idx) => {
-    if (listId && item[1] == listId) itemIdx = idx
-  })
+  // let itemIdx;
+  // listItems?.forEach((item, idx) => {
+  //   if (listId && item[1] == listId) itemIdx = idx
+  // })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -67,12 +67,12 @@ const CreateTask = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1 className="modal-form-title">Task Details</h1>
         <ul className="errors-container">
           {errors.map((error, idx) => (
-            <p key={idx}>{error}</p>
+            <p className="errors" key={idx}>{error}</p>
           ))}
 				</ul>
-        <h1 className="modal-form-title">Task Details</h1>
         <div className="todo-title-duedate">
           {/* <label className="todo-task-name">{task.name}</label> */}
           <input

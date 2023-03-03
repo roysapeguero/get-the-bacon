@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListsThunk, getListThunk } from "../../../store/lists";
+import { getListsThunk } from "../../../store/lists";
 import "./AllLists.css";
 import OpenModalButton from "../../OpenModalButton";
-import ListShow from "../ListShow/ListShow";
+// import ListShow from "../ListShow/ListShow";
 import ListItem from "../ListItem/ListItem";
 import CreateList from "../CreateList/CreateList";
 
@@ -22,7 +22,6 @@ const AllLists = () => {
   let listItems;
   if (Object.values(allLists).length) {
     listItems = allListsArr.map((list) => {
-
       return <ListItem key={list.id} list={list} listId={list.id} />;
     });
   }

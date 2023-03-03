@@ -1,0 +1,61 @@
+.login-left-container.signup-page {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.signup-left-middle {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+
+}
+
+.signup-people {
+  display: flex;
+  /* border: 1px solid red; */
+  justify-content: center;
+  flex-direction: row;
+}
+
+.signup-person-container {
+  /* border: 1px solid red; */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 10px;
+}
+
+.signup-person-image {
+  width: auto;
+  height: 100px;
+  object-fit: contain;
+  position: absolute;
+  top: 10px;
+  left: 8px;
+}
+
+.left {
+  background-color: #c35e6c;
+}
+
+.middle {
+  background-color: #0dc179;;
+}
+
+.right {
+  background-color: #f18896
+}
+
+.login-qoute-text.signup {
+  /* border: 1px solid red; */
+  width: 60%;
+  margin-top: 30px;
+  margin-left: 135px;
+  font-size: 30px;
+}

@@ -3,11 +3,12 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./LoginForm.css";
-import leftPerson from "../../assets/left-person.png";
-import middlePerson from "../../assets/middle-person.png";
-import rightPerson from "../../assets/right-person.png";
-import { NavLink } from "react-router-dom";
-import piggy from "../../assets/piggy-icon.png";
+import baconDood from '../../assets/bacon-icon.jpeg'
+// import leftPerson from "../../assets/left-person.png";
+// import middlePerson from "../../assets/middle-person.png";
+// import rightPerson from "../../assets/right-person.png";
+// import { NavLink } from "react-router-dom";
+// import piggy from "../../assets/piggy-icon.png";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -56,8 +57,8 @@ function LoginFormPage() {
           </div>
         </div>
         <div className="login-left-bottom">
-          <img />
-          <h3>
+          <img className="bacon-dood-img" src={baconDood} alt='' />
+          <h3 className="quote-credits">
             Quotes curated by Chris P. Bacon, renowned productivity expert
           </h3>
         </div>
@@ -66,13 +67,13 @@ function LoginFormPage() {
         <form className="login-form-item" onSubmit={handleSubmit}>
           <div className="inner-form-container">
             <ul>
-              {errors.map((error, idx) => (
-                <li key={idx}>{error}</li>
-              ))}
-            </ul>
             {/* <label> */}
             {/* Email */}
             <h3 className="form-title">Been here before? Welcome Back!</h3>
+              {errors.map((error, idx) => (
+                <p className="errors" key={idx}>{error}</p>
+              ))}
+            </ul>
             <input
               className="input-item"
               type="text"

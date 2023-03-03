@@ -21,11 +21,30 @@
   height: 100%;
   padding: 100px 50px;
   box-sizing: border-box;
+  justify-content: center;
 }
 
+.login-left-bottom {
+  display: flex;
+  align-items: center;
+  margin-top: 100px;
+}
 /* .login-qoute {
 
 } */
+
+.bacon-dood-img {
+  height: 80px;
+  min-width: 80px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.quote-credits {
+  color: rgba(255, 255, 255, 0.722);
+  font-weight: 500;
+  font-size: 18px;
+}
 
 .login-qoute-text {
   color: white;
@@ -34,6 +53,7 @@
 
 .login-right-container {
   width: 50%;
+  margin-top: 100px;
 }
 
 .login-form-item {
@@ -55,6 +75,13 @@
   padding: 10px 12px;
   font-size: 20px;
   margin-top: 20px;
+  color: #fb7289;
+  border: 2px solid #fb7289ac;
+  border-radius: 6px;
+}
+
+.input-item:focus {
+  outline-color: #fb7289;
 }
 
 .form-button {
@@ -68,4 +95,9 @@
   border: none;
   border-radius: 5px;
   margin-top: 20px;
+}
+
+.form-button:hover {
+  background-color: #fb7289;
+  cursor: pointer;
 }

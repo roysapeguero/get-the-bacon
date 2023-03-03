@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+// import OpenModalButton from "../OpenModalButton";
+// import LoginFormModal from "../LoginFormModal";
+// import SignupFormModal from "../SignupFormModal";
 import { NavLink } from "react-router-dom";
 
 function ProfileButton({ user }) {
@@ -33,6 +33,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    closeMenu()
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -54,11 +55,11 @@ function ProfileButton({ user }) {
             </p>
           </>
         ) : (
-          <div>
-            <NavLink to='/login'>
+          <div className="drop-links">
+            <NavLink className='action link' onClick={closeMenu} to='/login'>
               Login
             </NavLink>
-            <NavLink to='/signup'>
+            <NavLink className='action link' onClick={closeMenu} to='/signup'>
               Sign up
             </NavLink>
           </div>
