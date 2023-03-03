@@ -42,18 +42,24 @@ const AllTasks = () => {
           <div className="tasks-container">
             <ul className="tasks-wrapper">{taskItems}</ul>
           </div>
+          <OpenModalButton
+                className="add-task-modal-button"
+                modalComponent={<CreateTask />}
+                buttonText="Add Task"
+              />
         </>
       ) : (
         <>
+
           <div className="tasks-button-container">
             {allListsArr.length ? (
               <>
-                <h2>Now try adding a task!</h2>
-                <OpenModalButton
-                  className="add-task-modal-button"
-                  modalComponent={<CreateTask />}
-                  buttonText="Add Task"
-                />
+              <h2>Now try adding a task!</h2>
+              <OpenModalButton
+                className="add-task-modal-button"
+                modalComponent={<CreateTask />}
+                buttonText="Add Task"
+              />
               </>
             ) : (
               <h2>Make a list to start adding tasks :D</h2>
