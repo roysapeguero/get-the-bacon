@@ -21,7 +21,7 @@ const CreateTask = () => {
       return [list.name, list.id, list]
     });
   }
-  const [name, setName] = useState('Task Name')
+  const [name, setName] = useState('')
   // const [due, setDue] = useState('')
   const [notes, setNotes] = useState('')
   const [listId, setListId] = useState(listItems[0][1])
@@ -81,6 +81,7 @@ const CreateTask = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            placeholder="Click to add name here"
           />
           <div className="due-by-container">
             {/* <label className="todo-due-date">Due by: </label>
@@ -104,8 +105,9 @@ const CreateTask = () => {
           ></textarea>
         </div>
         <div className="todo-action-buttons">
-          <label>List: </label>
+          <label className="select-field-label">Select a list: </label>
           <select
+            className="select-field"
             name='list'
             value={listId}
             onChange={(e) => setListId(e.target.value)}

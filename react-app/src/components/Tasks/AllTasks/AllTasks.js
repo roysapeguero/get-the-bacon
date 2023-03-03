@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasksThunk, getTaskThunk } from "../../../store/tasks";
+import { getTasksThunk } from "../../../store/tasks";
 import "./AllTasks.css";
 import OpenModalButton from "../../OpenModalButton";
-import TaskShow from "../TaskShow/TaskShow";
+// import TaskShow from "../TaskShow/TaskShow";
 import TaskItem from "../TaskItem/TaskItem";
 import CreateTask from "../CreateTask/CreateTask";
 
@@ -15,11 +15,11 @@ const AllTasks = () => {
   const allListsArr = Object.values(lists);
 
   const allTasksArr = Object.values(allTasks);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getTasksThunk(allTasks)).then(() => {
-      setIsLoaded(true);
+      // setIsLoaded(true);
     });
   }, [dispatch, lists, currentTask]);
 

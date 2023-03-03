@@ -3,5 +3,86 @@
 }
 
 .list-task-items .list {
-  color: rgba(251, 164, 165, 0.835);;
+  color: rgba(251, 164, 165, 0.835);
+}
+
+
+.list-title-duedate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.list-task-name,
+.list-due-date,
+.list-due-date-input,
+.list-notes-text {
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(251, 164, 165, 0.835);
+
+}
+
+.list-task-name:focus,
+.list-due-date-input:focus {
+  border: none;
+  outline: none;
+}
+
+.list-due-date-input {
+  font-size: 18px;
+  /* border: 1px solid red; */
+  width: 140px;
+  /* font-weight: 700;
+  color: rgba(251, 164, 165, 0.835); */
+}
+
+.list-notes {
+  display: flex;
+  flex-direction: column;
+  margin: 25px 0;
+}
+
+.text-big {
+  border: 3px solid rgba(251, 164, 165, 0.835);
+  background-color:  rgba(251, 164, 165, 0.45);
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  height: 200px;
+  letter-spacing: 1.5px;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 8px;
+}
+
+.input-item.text-big:focus {
+  outline: none;
+  border: 3px solid rgba(251, 164, 165, 0.835)
+}
+
+.list-action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 40px;
+  /* border: 1px solid red; */
+}
+
+.list-button {
+  margin-left: 20px;
+  border-radius: 6px;
+  border: none;
+  background-color: rgba(251, 164, 165, 0.7);
+  color: white;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 15px;
+}
+
+.list-button:hover {
+  cursor: pointer;
+  background-color: rgba(251, 164, 165, 0.6);
 }

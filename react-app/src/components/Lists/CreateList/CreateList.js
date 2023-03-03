@@ -11,7 +11,7 @@ const CreateList = () => {
   const { closeModal } = useModal()
   const user = useSelector(state => state.session.user)
   let allLists = useSelector(state => state.Lists.allLists)
-  const [name, setName] = useState('List Name')
+  const [name, setName] = useState('')
   // const [due, setDue] = useState('')
   const [notes, setNotes] = useState('')
   const [errors, setErrors] = useState([]);
@@ -51,45 +51,46 @@ const CreateList = () => {
             <p key={idx}>{error}</p>
           ))}
 				</ul>
-        <h1 className="modal-form-title">Task Details</h1>
-        <div className="todo-title-duedate">
-          {/* <label className="todo-task-name">{task.name}</label> */}
+        <h1 className="modal-form-title">List Details</h1>
+        <div className="list-title-duedate">
+          {/* <label className="list-task-name">{task.name}</label> */}
           <input
-            className="todo-list-name"
+            className="list-task-name"
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            placeholder="Click to add name here"
           />
           <div className="due-by-container">
-            {/* <label className="todo-due-date">Due by: </label>
+            {/* <label className="list-due-date">Due by: </label>
             <input
-              className="todo-due-date-input"
+              className="list-due-date-input"
               type='date'
               value={due}
               onChange={(e) => setDue(e.target.value)}
             /> */}
           </div>
         </div>
-        <div className="todo-notes">
-          <label className="todo-notes-text" htmlFor="todo-notes-text">Notes</label>
+        <div className="list-notes">
+          <label className="list-notes-text" htmlFor="list-notes-text">Notes</label>
           <textarea
             className='input-item text-big'
-            name="todo-notes"
-            placeholder="Write more details about your task :)"
+            name="list-notes"
+            placeholder="Write more details about your list :)"
             value={notes}
             maxLength="2000"
             onChange={(e) => setNotes(e.target.value)}
           ></textarea>
         </div>
-        <div className="todo-action-buttons">
+        <div className="list-action-buttons">
           {/* <button type='button'>Mark Complete</button>
           <button  type='button' onClick={() =>
             // dispatch(deleteTaskThunk(task.id)).then(closeModal()).then(dispatch(() => getTasksThunk()))}>
             dispatch(deleteTaskThunk(task.id)).then(() => closeModal())}>
               Delete
           </button> */}
-          <button className='todo-button' type="submit">Save</button>
+          <button className='list-button' type="submit">Save</button>
         </div>
       </form>
     </div>

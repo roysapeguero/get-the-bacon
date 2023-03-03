@@ -2,8 +2,9 @@
   margin-top: 150px;
   /* border: 1px solid red; */
   margin-left: 50px;
-  min-height: 80vh;
+  height: 60vh;
   /* height: min-content; */
+  margin-bottom: 30px;
   width: 20%;
   padding: 30px;
   background-color: rgba(251, 204, 205, 0.715);

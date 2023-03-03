@@ -1,0 +1,12 @@
+.list-task-name::placeholder {
+  color: rgba(251, 164, 165, 0.835);
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+/* .input-item.text-big::placeholder {
+  color: white;
+} */
