@@ -2,8 +2,10 @@
   margin-top: 150px;
   /* border: 1px solid red; */
   margin-left: 50px;
-  min-height: 80vh;
-  width: 80%;
+  height: 60vh;
+  /* height: min-content; */
+  margin-bottom: 30px;
+  width: 60%;
   padding: 30px;
   background-color: rgba(251, 204, 205, 0.715);
   border-radius: 20px;
@@ -45,6 +47,12 @@
   text-align: left;
   overflow-wrap: break-word;
   overflow-x: hidden;
+}
+
+.open-list-modal-button:hover,
+.add-list-modal-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .open-list-modal-button {

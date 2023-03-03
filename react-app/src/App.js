@@ -5,7 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import AllTasks from "./components/Tasks/AllTasks/AllTasks";
+// import AllTasks from "./components/Tasks/AllTasks/AllTasks";
 import SplashPage from "./components/SplashPage/SplashPage";
 import HomePage from "./components/HomePage/HomePage";
 
