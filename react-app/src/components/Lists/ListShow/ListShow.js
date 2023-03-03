@@ -12,10 +12,11 @@ const ListShow = ({ list }) => {
   const dispatch = useDispatch()
   const { closeModal } = useModal()
   const currentList = useSelector(state => state.Lists.singleList)
+  const history = useHistory()
 
   const [taskItems, setTaskItems] = useState([])
   const [name, setName] = useState(list?.name || 'list Name')
-  const [due, setDue] = useState(list?.due || '')
+  // const [due, setDue] = useState(list?.due || '')
   const [notes, setNotes] = useState(list?.notes || '')
   const [errors, setErrors] = useState([]);
 
@@ -28,7 +29,7 @@ const ListShow = ({ list }) => {
         {
           ...currentList,
           name,
-          due,
+          // due,
           notes,
         },
         currentList.id
@@ -42,6 +43,13 @@ const ListShow = ({ list }) => {
     });
   }
 
+
+  const deleteList = listId => {
+    dispatch(deleteListThunk(listId))
+    closeModal()
+  }
+
+
   useEffect(() => {
       dispatch(getListThunk(list.id));
   }, [dispatch]);
@@ -54,6 +62,8 @@ const ListShow = ({ list }) => {
       )
     }
   }, [currentList]);
+
+
 
   return (
     <div>
@@ -73,13 +83,13 @@ const ListShow = ({ list }) => {
             required
           />
           <div className="due-by-container">
-            <label className="todo-due-date">Due by: </label>
+            {/* <label className="todo-due-date">Due by: </label>
             <input
               className="todo-due-date-input"
               type='date'
               value={due}
               onChange={(e) => setDue(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
         <div className="list-task-items">
@@ -99,8 +109,7 @@ const ListShow = ({ list }) => {
         <div className="todo-action-buttons">
 
           {/* <button className='todo-button' type='button'>Mark Complete</button> */}
-          <button className='todo-button' type='button' onClick={() =>
-            dispatch(deleteListThunk(list.id)).then(() => closeModal()).then(dispatch(getTasksThunk()))}>
+          <button className='todo-button' type='button' onClick={() => deleteList(currentList.id)}>
               Delete
           </button>
           <button className='todo-button' type="submit">Save</button>

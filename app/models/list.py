@@ -14,7 +14,7 @@ class List(db.Model):
     name = db.Column(db.String(200), nullable=False)
     notes = db.Column(db.String(2000))
     status = db.Column(db.String)
-    due = db.Column(db.String)
+    # due = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
@@ -28,7 +28,7 @@ class List(db.Model):
             'user_id': self.user_id,
             'name': self.name,
             'notes': self.notes,
-            'due': self.due,
+            # 'due': self.due,
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

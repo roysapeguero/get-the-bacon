@@ -1,46 +1,54 @@
-import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { deleteTaskThunk, editTaskThunk, createTaskThunk, getTaskThunk, getTasksThunk } from "../../../store/tasks"
-import { useModal } from "../../../context/Modal"
-import { useHistory } from "react-router-dom"
-import './TaskShow.css'
-import { getListsThunk } from "../../../store/lists"
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteTaskThunk,
+  editTaskThunk,
+  createTaskThunk,
+  getTaskThunk,
+  getTasksThunk,
+} from "../../../store/tasks";
+import { useModal } from "../../../context/Modal";
+import { useHistory } from "react-router-dom";
+import "./TaskShow.css";
+import { getListsThunk } from "../../../store/lists";
 // import { loadTasks } from "../../../store/tasks"
 
 const TaskShow = ({ task }) => {
-  const dispatch = useDispatch()
-  const { closeModal } = useModal()
-  const currentTask = useSelector(state => state.Tasks.singleTask)
-  const [name, setName] = useState(task?.name || 'Task Name')
-  const [due, setDue] = useState(task?.due || '')
-  const [notes, setNotes] = useState(task?.notes || '')
+  const dispatch = useDispatch();
+  const { closeModal } = useModal();
+  const currentTask = useSelector((state) => state.Tasks.singleTask);
+  const [name, setName] = useState(task?.name || "Task Name");
+  // const [due, setDue] = useState(task?.due || "");
+  const [notes, setNotes] = useState(task?.notes || "");
   const [errors, setErrors] = useState([]);
 
-
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setErrors([]);
-    return dispatch(
-      editTaskThunk(
-        {
-          ...currentTask,
-          name,
-          due,
-          notes,
-        },
-        currentTask.id
+    return (
+      dispatch(
+        editTaskThunk(
+          {
+            ...currentTask,
+            name,
+            // due,
+            notes,
+          },
+          currentTask.id
+        )
       )
-    )
-    // .then(task => dispatch(getTaskThunk(task.id)))
-    .then(closeModal)
-    .catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(Object.values(data.errors));
-    });
-  }
+        // .then(task => dispatch(getTaskThunk(task.id)))
+        .then(closeModal)
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(Object.values(data.errors));
+        })
+    );
+  };
+
 
   useEffect(() => {
-      dispatch(getTaskThunk(task.id));
+    dispatch(getTaskThunk(task.id));
   }, [dispatch]);
 
   return (
@@ -50,30 +58,32 @@ const TaskShow = ({ task }) => {
           {errors.map((error, idx) => (
             <p key={idx}>{error}</p>
           ))}
-				</ul>
+        </ul>
         <h1 className="modal-form-title">Task Details</h1>
         <div className="todo-title-duedate">
           <input
             className="todo-task-name"
-            type='text'
+            type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
           />
           <div className="due-by-container">
-            <label className="todo-due-date">Due by: </label>
+            {/* <label className="todo-due-date">Due by: </label>
             <input
               className="todo-due-date-input"
-              type='date'
+              type="date"
               value={due}
               onChange={(e) => setDue(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
         <div className="todo-notes">
-          <label className="todo-notes-text" htmlFor="todo-notes-text">Notes</label>
+          <label className="todo-notes-text" htmlFor="todo-notes-text">
+            Notes
+          </label>
           <textarea
-            className='input-item text-big'
+            className="input-item text-big"
             name="todo-notes"
             placeholder="Write more details about your task :)"
             value={notes}
@@ -83,15 +93,23 @@ const TaskShow = ({ task }) => {
         </div>
         <div className="todo-action-buttons">
           {/* <button className='todo-button' type='button'>Mark Complete</button> */}
-          <button className='todo-button' type='button' onClick={() =>
-            dispatch(deleteTaskThunk(task.id)).then(() => closeModal()).then(dispatch(getTasksThunk())).then(dispatch(getListsThunk()))}>
-              Delete
+          <button
+            className="todo-button"
+            type="button"
+            onClick={() => {
+              dispatch(deleteTaskThunk(task.id)).then(() => closeModal());
+              dispatch(getTasksThunk());
+            }}
+          >
+            Delete
           </button>
-          <button className='todo-button' type="submit">Save</button>
+          <button className="todo-button" type="submit">
+            Save
+          </button>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default TaskShow
+export default TaskShow;

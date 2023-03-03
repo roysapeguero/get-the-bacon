@@ -14,7 +14,7 @@ class Task(db.Model):
     list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")))
     name = db.Column(db.String(200), nullable=False)
     notes = db.Column(db.String(2000))
-    due = db.Column(db.String)
+    # due = db.Column(db.String)
     status = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
@@ -29,7 +29,7 @@ class Task(db.Model):
             'list_id': self.list_id,
             'name': self.name,
             'notes': self.notes,
-            'due': self.due,
+            # 'due': self.due,
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,

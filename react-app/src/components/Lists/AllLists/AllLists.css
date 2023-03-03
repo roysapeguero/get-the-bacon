@@ -3,7 +3,7 @@
   /* border: 1px solid red; */
   margin-left: 50px;
   min-height: 80vh;
-  width: fit-content;
+  width: 80%;
   padding: 30px;
   background-color: rgba(251, 204, 205, 0.715);
   border-radius: 20px;
@@ -17,6 +17,15 @@
   color: white;
 }
 
+.lists-container {
+  /* border: 1px solid red; */
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
 .lists-wrapper {
   /* border: 1px solid red; */
   padding: 0;
@@ -24,7 +33,24 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  margin-top: 20px;
+  /* align-items: flex-start; */
+  /* justify-content: flex-start; */
+}
+
+.list-name-item {
+  /* border: 1px solid red; */
+  width: fit-content;
+  height: fit-content;
+  text-align: left;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+}
+
+.open-list-modal-button {
+  margin: 0;
+  width: fit-content;
+  /* padding: 0; */
 }
 
 .add-list-modal-button {

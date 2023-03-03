@@ -7,7 +7,7 @@ import './ListItem.css'
 const ListItem = ({ list }) => {
 
   return (
-    <div className="check-name-item">
+    <div className="list-name-item">
 
       <OpenModalButton
         className="open-list-modal-button"

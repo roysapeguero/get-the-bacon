@@ -3,14 +3,21 @@
   /* border: 1px solid red; */
   margin-left: 50px;
   min-height: 80vh;
-  width: fit-content;
+  /* height: min-content; */
+  width: 20%;
   padding: 30px;
   background-color: rgba(251, 204, 205, 0.715);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+}
+
+.tasks-container {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .tasks-wrapper {
@@ -19,9 +26,12 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  overflow-y: scroll;
+  margin-top: 30px;
+
+  /* justify-content: space-around; */
+  /* overflow-y: scroll; */
 }
+
 
 .all-tasks-header {
   color: white;
@@ -36,7 +46,9 @@
   font-size: 18px;
   color: white;
   font-weight: 800;
-
+  text-align: left;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
 }
 
 .open-task-modal-button:hover,

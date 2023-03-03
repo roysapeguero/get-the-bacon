@@ -12,7 +12,7 @@ function Navigation({ isLoaded }) {
     <div className="nav-container">
       <div className="nav-bar">
         <div className="header-left">
-					<NavLink className='link 'exact to="/">
+					<NavLink className='link ' to="/">
           	<div className="logo">
               <img className="logo-img" src={piggy} alt="" />
               <h1 className="logo-text"><em>get the bacon</em></h1>

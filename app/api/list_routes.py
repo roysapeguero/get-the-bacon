@@ -7,13 +7,18 @@ import datetime
 list_routes = Blueprint('lists', __name__)
 
 # Get all lists
-@list_routes.route('/')
-# @login_required
+@list_routes.route('')
+@login_required
 def get_all_lists():
     """
     Query for all lists and returns them in a list of task dictionaries
     """
-    lists = List.query.all()
+    # lists = List.query.all()
+    # lists = current_user.lists
+    # if not lists:
+    #     return 'no lists'
+    lists = List.query.filter(List.user_id == current_user.id).all()
+
     return {list.id: list.to_dict() for list in lists}
 
 # Get list by id
@@ -33,7 +38,7 @@ def get_list(id):
 
 # Create list
 @list_routes.route('/', methods=['POST'])
-# @login_required
+@login_required
 def create_list():
     """
     Creates a task
@@ -46,7 +51,7 @@ def create_list():
         user_id = current_user.id,
         name = form.data['name'],
         notes = form.data['notes'],
-        due = form.data['due'],
+        # due = form.data['due'],
         status = 'Not Started',
         created_at = datetime.datetime.now(),
         updated_at = datetime.datetime.now()
@@ -72,7 +77,7 @@ def edit_list(id):
     if current_user.id == list.user_id:
         list.name = form.data['name']
         list.notes = form.data['notes']
-        list.due = form.data['due']
+        # list.due = form.data['due']
         list.status = 'Not Started'
         list.updated_at = datetime.datetime.now()
 

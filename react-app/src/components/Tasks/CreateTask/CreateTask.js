@@ -15,21 +15,21 @@ const CreateTask = () => {
   const allLists = useSelector(state => state.Lists.allLists)
   const allListsArr = Object.values(allLists);
 
-  const [name, setName] = useState('Task Name')
-  const [due, setDue] = useState('')
-  const [notes, setNotes] = useState('')
-  const [listId, setListId] = useState(1)
-  const [errors, setErrors] = useState([]);
-
   let listItems;
   if (Object.values(allLists).length) {
     listItems = allListsArr.map((list) => {
       return [list.name, list.id, list]
     });
   }
+  const [name, setName] = useState('Task Name')
+  // const [due, setDue] = useState('')
+  const [notes, setNotes] = useState('')
+  const [listId, setListId] = useState(listItems[0][1])
+  const [errors, setErrors] = useState([]);
+
 
   let itemIdx;
-  listItems.forEach((item, idx) => {
+  listItems?.forEach((item, idx) => {
     if (listId && item[1] == listId) itemIdx = idx
   })
 
@@ -39,7 +39,7 @@ const CreateTask = () => {
     return await dispatch(
       createTaskThunk({
         name,
-        due,
+        // due,
         notes,
         user_id: user.id,
         list_id: listId
@@ -83,13 +83,13 @@ const CreateTask = () => {
             required
           />
           <div className="due-by-container">
-            <label className="todo-due-date">Due by: </label>
+            {/* <label className="todo-due-date">Due by: </label>
             <input
               className="todo-due-date-input"
               type='date'
               value={due}
               onChange={(e) => setDue(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
         <div className="todo-notes">
@@ -110,11 +110,15 @@ const CreateTask = () => {
             value={listId}
             onChange={(e) => setListId(e.target.value)}
           >
-            {listItems.map((list) => (
+            {/* <option value={null} >
+              {listItems ? 'None' : 'Create lists to assign tasks'}
+            </option> */}
+            {listItems ? listItems.map((list) => (
               <option key={list[1]} value={list[1]}>
                 {list[0]}
               </option>
-            ))}
+
+            )) :  ''}
           </select>
           <button className='todo-button' type="submit">Save</button>
         </div>

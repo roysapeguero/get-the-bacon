@@ -12,7 +12,7 @@ const CreateList = () => {
   const user = useSelector(state => state.session.user)
   let allLists = useSelector(state => state.Lists.allLists)
   const [name, setName] = useState('List Name')
-  const [due, setDue] = useState('')
+  // const [due, setDue] = useState('')
   const [notes, setNotes] = useState('')
   const [errors, setErrors] = useState([]);
 
@@ -23,7 +23,7 @@ const CreateList = () => {
     return dispatch(
       createListThunk({
         name,
-        due,
+        // due,
         notes,
         user_id: user.id,
       })
@@ -62,13 +62,13 @@ const CreateList = () => {
             required
           />
           <div className="due-by-container">
-            <label className="todo-due-date">Due by: </label>
+            {/* <label className="todo-due-date">Due by: </label>
             <input
               className="todo-due-date-input"
               type='date'
               value={due}
               onChange={(e) => setDue(e.target.value)}
-            />
+            /> */}
           </div>
         </div>
         <div className="todo-notes">
