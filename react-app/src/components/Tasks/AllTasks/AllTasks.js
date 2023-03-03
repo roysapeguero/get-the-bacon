@@ -10,6 +10,7 @@ import CreateTask from "../CreateTask/CreateTask";
 const AllTasks = () => {
   const dispatch = useDispatch();
   const allTasks = useSelector((state) => state.Tasks.allTasks);
+  const currentTask = useSelector(state => state.Tasks.singleTask)
   const lists = useSelector((state) => state.Lists.allLists);
   const allListsArr = Object.values(lists);
 
@@ -20,7 +21,7 @@ const AllTasks = () => {
     dispatch(getTasksThunk(allTasks)).then(() => {
       setIsLoaded(true);
     });
-  }, [dispatch, lists]);
+  }, [dispatch, lists, currentTask]);
 
   let taskItems;
   if (Object.values(allTasks).length) {
