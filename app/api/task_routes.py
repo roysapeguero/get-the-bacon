@@ -63,7 +63,7 @@ def create_task():
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
-    if form.errors:
+    else:
         return form.errors
 
 # Edit task by id
@@ -90,8 +90,9 @@ def edit_task(id):
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
-    else:
-        return {"Error": "Could not edit task"}
+
+    if form.errors:
+        return form.errors
 
 
 # Delete a task by task id

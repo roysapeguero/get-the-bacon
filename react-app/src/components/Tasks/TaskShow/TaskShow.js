@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteTaskThunk,
   editTaskThunk,
-  createTaskThunk,
+  // createTaskThunk,
   getTaskThunk,
   getTasksThunk,
 } from "../../../store/tasks";
 import { useModal } from "../../../context/Modal";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import "./TaskShow.css";
-import { getListsThunk } from "../../../store/lists";
+// import { getListsThunk } from "../../../store/lists";
 // import { loadTasks } from "../../../store/tasks"
 
 const TaskShow = ({ task }) => {

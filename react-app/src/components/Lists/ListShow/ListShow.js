@@ -5,6 +5,9 @@ import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
 import './ListShow.css'
 import TaskItem from "../../Tasks/TaskItem/TaskItem"
+// import OpenModalButton from "../../OpenModalButton"
+// import CreateTask from "../../Tasks/CreateTask/CreateTask"
+
 
 const ListShow = ({ list }) => {
   const dispatch = useDispatch()
@@ -53,7 +56,7 @@ const ListShow = ({ list }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (currentList.id && Object.values(currentList.tasks).length) {
+    if (currentList.id == list.id && Object.values(currentList.tasks).length) {
       setTaskItems(Object.values(currentList.tasks).map((task) => {
           return <TaskItem key={task.id} task={task} taskId={task.id} />;
         })
@@ -93,6 +96,11 @@ const ListShow = ({ list }) => {
         <div className="list-task-items">
             {taskItems}
         </div>
+        {/* <OpenModalButton
+                className="add-task-modal-button"
+                modalComponent={<CreateTask />}
+                buttonText="+"
+              /> */}
         <div className="list-notes">
           <label className="list-notes-text" htmlFor="list-notes-text">Notes</label>
           <textarea

@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 // import AllTasks from "./components/Tasks/AllTasks/AllTasks";
 import SplashPage from "./components/SplashPage/SplashPage";
 import HomePage from "./components/HomePage/HomePage";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Footer />
     </>
   );
 }

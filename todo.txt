@@ -1,1 +1,15 @@
-do the login thing
+todo
+readme
+style fully
+error handling
+make title and decriptions throw length errors so user knows
+fix update issue with long string
+double login error thing
+
+
+
+done
+about links
+change login handlers to invalid credentials
+fix tasks showing on wrong lists
+not allowing single letter signups

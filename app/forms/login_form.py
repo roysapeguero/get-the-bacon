@@ -9,7 +9,7 @@ def user_exists(form, field):
     email = field.data
     user = User.query.filter(User.email == email).first()
     if not user:
-        raise ValidationError('Credentials were incorrect.')
+        raise ValidationError('Invalid Credentials.')
 
 
 def password_matches(form, field):
@@ -17,12 +17,12 @@ def password_matches(form, field):
     password = field.data
     email = form.data['email']
     user = User.query.filter(User.email == email).first()
-    if not user:
-        raise ValidationError('No such user exists.')
-    if not user.check_password(password):
-        raise ValidationError('Credentials were incorrect.')
+    # if not user:
+    #     raise ValidationError('No such user exists.')
+    if not user or not user.check_password(password):
+        raise ValidationError('Invalid Credentials.')
 
 
 class LoginForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired(), password_matches, Length(min=1,max=12, message='Password must be between 1 and 12 characters long.')])
+    password = StringField('password', validators=[DataRequired(), password_matches, Length(min=6,max=12, message='Password must be between 6 and 12 characters long.')])
