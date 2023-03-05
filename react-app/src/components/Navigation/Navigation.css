@@ -1,8 +1,9 @@
 .profile-dropdown {
   position: absolute;
-  width: 100px;
+  width: fit-content;
   height: 30px;
   /* right: 0; */
+
 }
 
 .hidden {
@@ -33,6 +34,7 @@
 }
 
 ul.profile-dropdown {
+
   right: 20px;
   /* top: 20px; */
 }
@@ -63,6 +65,7 @@ ul.profile-dropdown {
 .profile-dropdown {
 	/* z-index: 1000; */
 	right: 30;
+
 }
 
 .menu-drop-btn {
@@ -73,7 +76,9 @@ ul.profile-dropdown {
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 20px;
-  width: 100px;
+  width: fit-content;
+  /* border: 1px solid red; */
+
 }
 
 .menu-drop-btn:hover,
