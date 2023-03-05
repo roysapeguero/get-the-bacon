@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
-  background-color: #D09099;
+  background-color: #FFCCCE;
   height: 100%;
   padding: 100px 50px;
   box-sizing: border-box;
@@ -76,7 +76,7 @@
   font-size: 20px;
   margin-top: 20px;
   color: #fb7289;
-  border: 2px solid #fb7289ac;
+  border: 1px solid rgb(223, 222, 222);
   border-radius: 6px;
 }
 
@@ -100,4 +100,8 @@
 .form-button:hover {
   background-color: #fb7289;
   cursor: pointer;
+}
+
+.form-button:focus {
+  outline-color: white;
 }

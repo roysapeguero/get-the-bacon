@@ -1,6 +1,6 @@
 .footer {
   height: 170px;
-  background-color: #d09099;;
+  background-color: #FFCCCE;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,13 +8,13 @@
   width: 100%;
   margin: auto;
   z-index: -3;
-  /* padding-bottom: 60px; */
-
+  padding-right: 40px;
+  border-top: 1px solid white;
 }
 
 .dev-info {
   color: white;
-  opacity: 0.95;
+  /* opacity: 0.95; */
   font-weight: 600;
   font-size: 20px;
   margin-bottom: 5px;
@@ -31,7 +31,7 @@
 
 .dev-name {
   color: white;
-  opacity: 0.95;
+  /* opacity: 0.95; */
 
   font-size: 16px;
   font-weight: 500;
@@ -58,15 +58,19 @@ button.contact-btns {
   padding-top: 3px;
   height: 37px;
   border: none;
-  opacity: 0.9;
+  background-color: white;
+
 }
 
 button.contact-btns:hover {
-  opacity: 1;
+  opacity: 0.8;
+
+  cursor: pointer;
 }
 
 .fa-brands.fa-github,
 .fa-brands.fa-linkedin-in {
   text-decoration: none;
-  color: #d09099;
+  color: #FFCCCE;
+  background-color: white;
 }

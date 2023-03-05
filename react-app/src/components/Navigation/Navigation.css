@@ -9,7 +9,7 @@
   display: none;
 }
 .nav-container {
-  background-color: #D09099;
+  background-color: #FFCCCE;
   position: absolute;
   left: 0;
   right: 0;
@@ -37,7 +37,7 @@ ul.profile-dropdown {
   /* top: 20px; */
 }
 
-.drop-links {
+.drop-links, .logged-in {
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
@@ -50,12 +50,14 @@ ul.profile-dropdown {
   font-weight: 700;
   border: 2px solid rgba(251, 164, 165, 0.835);
   border-radius: 5px;
-  width: 80px;
+  width: fit-content;
   /* margin-right: 20px; */
 }
 
+
 .action.link:hover {
   color: rgba(251, 164, 165, 0.6);
+  cursor: pointer;
 }
 
 .profile-dropdown {

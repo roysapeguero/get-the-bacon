@@ -7,7 +7,7 @@
   margin-bottom: 30px;
   width: 20%;
   padding: 30px;
-  background-color: rgba(251, 204, 205, 0.715);
+  background-color: #ffccce;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -52,6 +52,10 @@
   overflow-x: hidden;
 }
 
+.open-task-modal-button.list {
+  margin-top: -1px;
+}
+
 .open-task-modal-button:hover,
 .add-task-modal-button:hover {
   cursor: pointer;
@@ -64,7 +68,7 @@
   font-size: 18px;
   padding: 7px;
   font-weight: 800;
-  color: rgba(251, 204, 205, 0.715);
+  color: #ffccce;
   border-radius: 6px;
 }
 
