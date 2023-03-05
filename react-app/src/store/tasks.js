@@ -69,7 +69,6 @@ export const getTaskThunk = (taskId) => async (dispatch) => {
 
 // Edit
 export const editTaskThunk = (task, taskId) => async (dispatch) => {
-  console.log('hello', task, taskId)
   const res = await fetch(`/api/tasks/${taskId}`, {
     method: "PUT",
     headers: {
@@ -78,12 +77,11 @@ export const editTaskThunk = (task, taskId) => async (dispatch) => {
     body: JSON.stringify(task),
   });
   if (res.ok) {
-    const data = await res.json();
-    dispatch(editTask(data));
-    return data
+    const task = await res.json();
+    dispatch(editTask(task));
   } else {
     const data = await res.json();
-    if (data.errors) return res;
+    if (data.errors) return data;
   }
 };
 
@@ -102,7 +100,7 @@ export const createTaskThunk = (task) => async (dispatch) => {
     dispatch(createTask(task));
   } else {
     const data = await res.json();
-    if (data.errors) return res;
+    if (data.errors) return data;
   }
 };
 
@@ -119,7 +117,7 @@ export const deleteTaskThunk = (taskId) => async (dispatch) => {
     return data
   } else {
     const data = await res.json();
-    if (data.errors) return res;
+    if (data.errors) return data;
   }
 };
 

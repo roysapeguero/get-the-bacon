@@ -42,7 +42,7 @@ const AllLists = () => {
         </>
       ) : (
         <>
-          <h2>no listkies bro</h2>
+          <h2>Click 'Add List' to make your first list!</h2>
         </>
       )}
       <div className="lists-button-container">

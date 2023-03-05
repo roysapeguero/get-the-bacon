@@ -6,6 +6,17 @@ import datetime
 
 task_routes = Blueprint('tasks', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{error}')
+    return errorMessages
+
+
 # Get all tasks
 @task_routes.route('')
 @login_required
@@ -58,13 +69,12 @@ def create_task():
         created_at = datetime.datetime.now(),
         updated_at = datetime.datetime.now()
         )
-        print('hello', task)
 
         db.session.add(task)
         db.session.commit()
         return task.to_dict()
-    else:
-        return form.errors
+    if form.errors:
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 # Edit task by id
 @task_routes.route('/<int:id>', methods=['PUT'])
@@ -75,9 +85,10 @@ def edit_task(id):
     """
 
     form = TaskForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     task = Task.query.get(id)
 
-    if current_user.id == task.user_id:
+    if current_user.id == task.user_id and form.validate_on_submit():
         # task.user_id = current_user.id
         # task.list_id = form.data['list_id']
         task.name = form.data['name']
@@ -92,7 +103,8 @@ def edit_task(id):
         return task.to_dict()
 
     if form.errors:
-        return form.errors
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
 
 
 # Delete a task by task id

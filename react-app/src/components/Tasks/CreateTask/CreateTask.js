@@ -27,34 +27,27 @@ const CreateTask = () => {
   const [listId, setListId] = useState(listItems[0][1])
   const [errors, setErrors] = useState([]);
 
-
-  // let itemIdx;
-  // listItems?.forEach((item, idx) => {
-  //   if (listId && item[1] == listId) itemIdx = idx
-  // })
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors([]);
-    return await dispatch(
-      createTaskThunk({
+    const task = {
         name,
         // due,
         notes,
         user_id: user.id,
         list_id: listId
+      }
 
-      })
-    )
-    .then(() => {
-      dispatch(getTasksThunk());
-      dispatch(getListsThunk());
-      closeModal();
-    })
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(Object.values(data.errors));
-      });
+      const data = await dispatch(createTaskThunk(task))
+      if (data){
+          setErrors(data.errors);
+        } else {
+          setErrors([]);
+          dispatch(getTasksThunk());
+          dispatch(getListsThunk());
+          closeModal()
+        }
+      // });
     }
 
 

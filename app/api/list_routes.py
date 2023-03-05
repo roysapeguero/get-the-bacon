@@ -6,6 +6,17 @@ import datetime
 
 list_routes = Blueprint('lists', __name__)
 
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{error}')
+    return errorMessages
+
 # Get all lists
 @list_routes.route('')
 @login_required
@@ -61,7 +72,8 @@ def create_list():
         db.session.commit()
         return list.to_dict()
     if form.errors:
-        return form.errors
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
 
 # Edit list by id
 @list_routes.route('/<int:id>', methods=['PUT'])
@@ -72,9 +84,10 @@ def edit_list(id):
     """
 
     form = ListForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
     list = List.query.get(id)
 
-    if current_user.id == list.user_id:
+    if current_user.id == list.user_id and form.validate_on_submit():
         list.name = form.data['name']
         list.notes = form.data['notes']
         # list.due = form.data['due']
@@ -84,8 +97,9 @@ def edit_list(id):
         db.session.add(list)
         db.session.commit()
         return list.to_dict()
-    else:
-        return {"Error": "Could not edit list"}
+    if form.errors:
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
 
 
 # Delete a list by list id

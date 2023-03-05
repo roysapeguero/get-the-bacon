@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   deleteTaskThunk,
   editTaskThunk,
-  // createTaskThunk,
   getTaskThunk,
   getTasksThunk,
 } from "../../../store/tasks";
@@ -22,28 +21,25 @@ const TaskShow = ({ task }) => {
   const [notes, setNotes] = useState(task?.notes || "");
   const [errors, setErrors] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    return (
-      dispatch(
-        editTaskThunk(
+    const task =
           {
             ...currentTask,
             name,
             // due,
             notes,
-          },
-          currentTask.id
-        )
-      )
-        // .then(task => dispatch(getTaskThunk(task.id)))
-        .then(closeModal)
-        .catch(async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(Object.values(data.errors));
-        })
-    );
+          }
+
+        const data = await dispatch(editTaskThunk(task, currentTask.id))
+        if (data){
+          setErrors(data.errors);
+        } else {
+          setErrors([]);
+          closeModal()
+        }
+
   };
 
 
@@ -54,12 +50,12 @@ const TaskShow = ({ task }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1 className="modal-form-title">Task Details</h1>
         <ul className="errors-container">
           {errors.map((error, idx) => (
-            <p key={idx}>{error}</p>
+            <p className="errors" key={idx}>{error}</p>
           ))}
         </ul>
-        <h1 className="modal-form-title">Task Details</h1>
         <div className="todo-title-duedate">
           <input
             className="todo-task-name"

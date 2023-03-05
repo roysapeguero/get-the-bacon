@@ -1,6 +1,5 @@
 .all-lists-container {
   margin-top: 150px;
-  /* border: 1px solid red; */
   margin-left: 50px;
   height: 60vh;
   /* height: min-content; */
@@ -35,7 +34,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* align-items: flex-start; */
   /* justify-content: flex-start; */
 }

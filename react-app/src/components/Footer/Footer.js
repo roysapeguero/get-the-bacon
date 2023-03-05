@@ -11,7 +11,7 @@ function Footer() {
             <div className="dev-ind-container">
               <button className="contact-btns">
                 <a target="_blank" href="https://github.com/roysapeguero">
-                  <i class="fa-brands fa-github"></i>
+                  <i className="fa-brands fa-github"></i>
                 </a>
               </button>
               <button className="contact-btns">

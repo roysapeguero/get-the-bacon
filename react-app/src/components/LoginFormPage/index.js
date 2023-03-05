@@ -23,6 +23,7 @@ function LoginFormPage() {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
+      console.log(data)
       setErrors(data);
     }
   };

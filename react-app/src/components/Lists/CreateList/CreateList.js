@@ -16,24 +16,27 @@ const CreateList = () => {
   const [errors, setErrors] = useState([]);
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors([]);
-    return dispatch(
-      createListThunk({
+    const list = {
         name,
         // due,
         notes,
         user_id: user.id,
-      })
-    )
+      }
+
     // .then(history.push(`/`))
     // .then(dispatch(getTasksThunk(allTasks)))
-    .then(closeModal)
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(Object.values(data.errors));
-      });
+    const data = await dispatch(createListThunk(list))
+    if (data){
+        setErrors(data.errors);
+      } else {
+        setErrors([]);
+        // dispatch(getTasksThunk());
+        // dispatch(getListsThunk());
+        closeModal()
+      }
     }
 
 
@@ -45,12 +48,12 @@ const CreateList = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1 className="modal-form-title">List Details</h1>
         <ul className="errors-container">
           {errors.map((error, idx) => (
-            <p key={idx}>{error}</p>
+            <p className="errors" key={idx}>{error}</p>
           ))}
 				</ul>
-        <h1 className="modal-form-title">List Details</h1>
         <div className="list-title-duedate">
           {/* <label className="list-task-name">{task.name}</label> */}
           <input

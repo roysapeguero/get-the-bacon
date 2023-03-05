@@ -63,7 +63,6 @@ export const getListThunk = (listId) => async (dispatch) => {
 
 // Edit
 export const editListThunk = (list, listId) => async (dispatch) => {
-  console.log('hello', list, listId)
   const res = await fetch(`/api/lists/${listId}`, {
     method: "PUT",
     headers: {
@@ -72,9 +71,12 @@ export const editListThunk = (list, listId) => async (dispatch) => {
     body: JSON.stringify(list),
   });
   if (res.ok) {
+    const list = await res.json();
+    dispatch(editList(list));
+    // return list
+  } else {
     const data = await res.json();
-    dispatch(editList(data));
-    return data
+    if (data.errors) return data;
   }
 };
 
@@ -89,10 +91,12 @@ export const createListThunk = (list) => async (dispatch) => {
   });
 
   if (res.ok) {
-
     const list = await res.json();
     dispatch(createList(list));
-    return list
+    // return list
+  } else {
+    const data = await res.json();
+    if (data.errors) return data;
   }
 };
 
