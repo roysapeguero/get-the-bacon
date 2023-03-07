@@ -125,3 +125,7 @@ ul.profile-dropdown {
     color: inherit;
     text-decoration: none;
 }
+
+.jobs {
+  margin: 5px 0;
+}

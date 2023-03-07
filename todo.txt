@@ -1,14 +1,14 @@
 todo
 readme
-style fully
-error handling
-make title and decriptions throw length errors so user knows
 fix update issue with long string
 double login error thing
-
+add copy of resume
 
 
 done
+error handling
+style fully
+make title and decriptions throw length errors so user knows
 about links
 change login handlers to invalid credentials
 fix tasks showing on wrong lists

@@ -1,0 +1,73 @@
+.all-jobs-container {
+  margin-top: 150px;
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 60vh;
+  /* height: min-content; */
+  margin-bottom: 30px;
+  width: 90%;
+  padding: 30px;
+  background-color: #ffccce;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: scroll;
+}
+
+.all-jobs-header {
+  color: white;
+}
+
+.jobs-container {
+  /* border: 1px solid red; */
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+.jobs-wrapper {
+  /* border: 1px solid red; */
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* margin-top: 20px; */
+  /* align-items: flex-start; */
+  /* justify-content: flex-start; */
+}
+
+.job-name-item {
+  /* border: 1px solid red; */
+  width: fit-content;
+  height: fit-content;
+  text-align: left;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+}
+
+.open-job-modal-button:hover,
+.add-job-modal-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.open-job-modal-button {
+  margin: 0;
+  width: fit-content;
+  /* padding: 0; */
+}
+
+.add-job-modal-button {
+  background-color: white;
+  border: none;
+  font-size: 18px;
+  padding: 7px;
+  font-weight: 800;
+  color: #ffccce;
+  border-radius: 6px;
+
+}

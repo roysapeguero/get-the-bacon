@@ -1,0 +1,149 @@
+.job-modal {
+  /* border: 1px solid red; */
+  overflow-x: hidden;
+}
+
+
+.tabs-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  /* width: 500px; */
+  height: fit-content;
+  background: #f8dfe08f;
+  /* margin: 0 auto 0; */
+  /* word-break: break-all; */
+  /* border: 1px solid rgba(0, 0, 0, 0.274); */
+}
+
+
+.bloc-tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 15px;
+}
+
+.tabs {
+  background: #ffccce;
+  padding: 15px;
+  text-align: center;
+  width: 70px;
+  cursor: pointer;
+  /* border: 1px solid white; */
+  box-sizing: content-box;
+  position: relative;
+  outline: none;
+  margin-top: 5px;
+}
+/* .tabs:not(:last-child){
+  border-right: 1px solid rgba(0, 0, 0, 0.274);
+} */
+
+.active-tabs  {
+  background: rgba(251, 164, 165, 0.835);
+  border-bottom: 1px solid transparent;
+}
+
+.active-tabs::before {
+  content: "";
+  display: block;
+  position: absolute;
+  /* top: 3px; */
+  /* left: 50%; */
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 100%;
+  /* z-index: 0; */
+  /* background: red; */
+}
+
+
+
+button {
+  border: none;
+
+}
+.content-tabs {
+  flex-grow : 1;
+}
+.content {
+  background: white;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.content h2 {
+  padding: 0px 0 5px 0px;
+}
+.content hr {
+  width: 100px;
+  height: 2px;
+  background: #222;
+  margin-bottom: 5px;
+}
+.content p {
+  width: 100%;
+  height: 100%;
+}
+.active-content {
+  display: block;
+}
+.company-img-container {
+  /* border: 1px solid red; */
+  height: 200px;
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.company-img {
+  object-fit: contain;
+  width: 300px;
+  height: 200px;
+}
+
+.job-input-item {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(251, 164, 165, 0.835);
+  box-sizing: border-box;
+  width: 94%;
+  height: 48px;
+  padding: 10px 12px;
+  margin: 5px 0 15px;
+  border: 1px solid rgb(223, 222, 222);
+  border-radius: 6px;
+}
+
+.input-text-label {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(180, 180, 180);
+
+}
+
+.job-input-item:focus {
+  outline: none;
+}
+
+.job-text-area {
+  height: 200px;
+}
+
+.job-text-area.notes {
+  height: 100px;
+}
+
+.job-task-item .open-task-modal-button {
+  color: rgba(251, 164, 165, 0.835);
+
+}
+
+.job-task-item {
+  margin-top: 20px;
+
+}

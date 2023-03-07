@@ -1,0 +1,12 @@
+.job-name-item {
+  display: flex;
+  flex-direction: column;
+  /* border-radius: 10px; */
+  margin: 10px 0;
+
+}
+
+.job-item .company-img {
+  margin: 5px 0;
+  border-radius: 10px;
+}

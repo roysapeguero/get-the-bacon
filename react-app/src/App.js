@@ -9,6 +9,8 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage/SplashPage";
 import HomePage from "./components/HomePage/HomePage";
 import Footer from "./components/Footer/Footer";
+import AllJobs from "./components/Jobs/AllJobs/AllJobs";
+import JobShow from "./components/Jobs/JobShow/JobShow";
 
 
 function App() {
@@ -30,6 +32,12 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/jobs/:jobId">
+            <JobShow />
+          </Route>
+          <Route path="/jobs">
+            <AllJobs />
           </Route>
           <Route exact path="/">
             {user ? <HomePage /> : <SplashPage />}

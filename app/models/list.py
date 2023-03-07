@@ -19,6 +19,7 @@ class List(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     users = db.relationship("User", back_populates = "lists")
+    jobs = db.relationship("Job", back_populates = "lists")
     tasks = db.relationship("Task", back_populates = "lists", cascade="all, delete")
 
 
