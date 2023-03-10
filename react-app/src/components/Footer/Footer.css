@@ -8,7 +8,7 @@
   width: 100%;
   margin: auto;
   z-index: -3;
-  padding-right: 40px;
+  /* padding-right: 40px; */
   border-top: 1px solid white;
   text-align: center;
 }
