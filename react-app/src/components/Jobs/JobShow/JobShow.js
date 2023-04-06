@@ -72,11 +72,10 @@ const JobShow = ({ job }) => {
 
     const data = await dispatch(editJobThunk(job, currentJob.id));
     if (data) {
-      console.log(data);
       setErrors(data.errors);
+      closeModal()
     } else {
       setErrors([]);
-      closeModal();
     }
   };
 
@@ -89,7 +88,7 @@ const JobShow = ({ job }) => {
       <form onSubmit={handleSubmit}>
         <h1 className="modal-form-title">Job Details</h1>
         <ul className="errors-container">
-          {errors.map((error, idx) => (
+          {errors?.map((error, idx) => (
             <p className="errors" key={idx}>
               {error}
             </p>

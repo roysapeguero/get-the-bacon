@@ -64,21 +64,19 @@ const CreateJob = () => {
       hooks,
       extra_notes: extraNotes,
     };
-    console.log('no??', job)
+
     const data = await dispatch(createJobThunk(job));
     if (data) {
       setErrors(data.errors);
     } else {
       setErrors([]);
       dispatch(getJobsThunk());
-      console.log(job)
       closeModal();
     }
   };
 
   useEffect(() => {
     dispatch(getJobsThunk());
-    // dispatch(getListThunk(listId));
   }, [dispatch]);
 
   return (
