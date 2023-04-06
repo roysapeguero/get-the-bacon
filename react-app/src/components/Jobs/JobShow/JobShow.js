@@ -29,7 +29,7 @@ const JobShow = ({ job }) => {
   const [jobDescription, setJobDescription] = useState(
     job?.job_description || ""
   );
-  const [salary, setSalary] = useState(`$ ${job?.salary}` || "");
+  const [salary, setSalary] = useState(job?.salary || 0);
   const [jobNotes, setJobNotes] = useState(job?.job_notes || "");
   const [hooks, setHooks] = useState(job?.hooks || "");
   const [extraNotes, setExtraNotes] = useState(job?.extra_notes || "");
@@ -46,12 +46,12 @@ const JobShow = ({ job }) => {
     });
   }
 
-
   const toggleTab = (index) => {
     setToggleState(index);
   };
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     setErrors([]);
     const job = {
       ...currentJob,
@@ -67,10 +67,12 @@ const JobShow = ({ job }) => {
       job_notes: jobNotes,
       hooks,
       extra_notes: extraNotes,
+      list_id: listId
     };
 
     const data = await dispatch(editJobThunk(job, currentJob.id));
     if (data) {
+      console.log(data);
       setErrors(data.errors);
     } else {
       setErrors([]);
@@ -131,6 +133,7 @@ const JobShow = ({ job }) => {
               }
             >
               <div className="company-img-container">
+                {/* {companyImageUrl ? } */}
                 <img className="company-img" src={companyImageUrl} alt="" />
               </div>
               <div className="basic-info-text">
@@ -138,17 +141,18 @@ const JobShow = ({ job }) => {
                   Job Title:
                 </label>
                 <input
-                name="job-title"
+                  name="job-title"
                   className="job-title job-input-item"
                   type="text"
                   value={jobTitle}
                   onChange={(e) => setJobTitle(e.target.value)}
                   required
                 />
-                <label className="input-text-label" htmlFor="job-benefits">
+                <label className="input-text-label" htmlFor="company-name">
                   Company Name:
                 </label>
                 <input
+                  name="company-name"
                   className="company-name job-input-item"
                   type="text"
                   value={companyName}
@@ -184,7 +188,6 @@ const JobShow = ({ job }) => {
                   type="text"
                   value={benefits}
                   onChange={(e) => setBenefits(e.target.value)}
-                  required
                 />
               </div>
             </div>
@@ -202,49 +205,26 @@ const JobShow = ({ job }) => {
                   type="text"
                   value={listingUrl}
                   onChange={(e) => setListingUrl(e.target.value)}
-                  required
                 />
-                <label className="input-text-label" htmlFor="job-benefits">
+                <label className="input-text-label" htmlFor="job-text-area">
                   Job Description:
                 </label>
                 <textarea
+                  name="job-text-area"
                   className="job-text-area job-input-item"
                   type="text-area"
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
-                  required
                 />
                 <label className="input-text-label" htmlFor="job-benefits">
                   Possible Salary:
                 </label>
-                  <input
+                <input
                   className="job-salary job-input-item"
                   type="text"
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
-                  required
-                  />
-                {/* <label className="input-text-label" htmlFor="job-benefits">
-                  Copy of Resume:
-                </label>
-                <input
-                  className="job-status job-input-item"
-                  type="text"
-                  value={}
-                  onChange={(e) => setJobStatus(e.target.value)}
-                  required
                 />
-                <label className="input-text-label" htmlFor="job-benefits">
-                  Benefits:
-                </label>
-                <input
-                  name="job-benefits"
-                  className="job-benefits job-input-item"
-                  type="text"
-                  value={benefits}
-                  onChange={(e) => setBenefits(e.target.value)}
-                  required
-                /> */}
               </div>
             </div>
 
@@ -254,35 +234,29 @@ const JobShow = ({ job }) => {
               }
             >
               <div className="basic-info-text">
-                <label className="input-text-label" htmlFor="job-benefits">
-                  Research Notes:
-                </label>
+                <label className="input-text-label">Research Notes:</label>
                 <textarea
+                  name="research-notes"
                   className="job-text-area notes job-input-item"
                   type="text"
                   value={jobNotes}
                   onChange={(e) => setJobNotes(e.target.value)}
-                  required
                 />
-                <label className="input-text-label" htmlFor="job-benefits">
-                  Interview Hooks:
-                </label>
+                <label className="input-text-label">Interview Hooks:</label>
                 <textarea
+                  name="interview-notes"
                   className="job-text-area notes job-input-item"
                   type="text"
                   value={hooks}
                   onChange={(e) => setHooks(e.target.value)}
-                  required
                 />
-                <label className="input-text-label" htmlFor="job-benefits">
-                  Extra Notes:
-                </label>
+                <label className="input-text-label">Extra Notes:</label>
                 <textarea
+                  name="extra-notes"
                   className="job-text-area notes job-input-item"
                   type="text"
                   value={extraNotes}
                   onChange={(e) => setExtraNotes(e.target.value)}
-                  required
                 />
               </div>
             </div>

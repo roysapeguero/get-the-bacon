@@ -17,7 +17,7 @@ class JobForm(FlaskForm):
     company_name = StringField('company_name', validators=[DataRequired()])
     company_image_url = StringField('company_image_url')
     job_location = StringField('job_location', validators=[DataRequired()])
-    status = StringField('status', validators=[DataRequired()])
+    status = StringField('status')
     benefits = StringField('benefits')
     listing_url = StringField('listing_url')
     job_description = TextAreaField('job_description')

@@ -63,17 +63,20 @@ export const getJobThunk = (jobId) => async (dispatch) => {
 
 // Edit
 export const editJobThunk = (job, jobId) => async (dispatch) => {
-  const res = await fetch(`/api/jobs/${jobId}`, {
+  console.log('hi', job, jobId)
+  const res = await fetch(`/api/jobs/${job.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(job),
   });
+  console.log('ummm', res)
+
   if (res.ok) {
     const job = await res.json();
     dispatch(editJob(job));
-    // return job
+    return job
   } else {
     const data = await res.json();
     if (data.errors) return data;
@@ -82,6 +85,7 @@ export const editJobThunk = (job, jobId) => async (dispatch) => {
 
 // Create job
 export const createJobThunk = (job) => async (dispatch) => {
+  console.log('hi', job)
   const res = await fetch("/api/jobs/", {
     method: "POST",
     headers: {
@@ -90,6 +94,7 @@ export const createJobThunk = (job) => async (dispatch) => {
     body: JSON.stringify(job),
   });
 
+  console.log('res', res)
   if (res.ok) {
     const job = await res.json();
     dispatch(createJob(job));
@@ -126,9 +131,7 @@ const jobsReducer = (state = initialState, action) => {
 
     case GET_JOB:
       newState.singleJob = action.payload
-      // newState.singleJob.tasks = {...action.payload.tasks}
       return newState
-      // return { ...state, singleJob: action.payload }
 
     case EDIT_JOB:
       newState.allJobs = {...newState.allJobs, [action.payload.id]: action.payload}

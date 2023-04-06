@@ -95,6 +95,7 @@ def edit_job(id):
 
     if current_user.id == job.user_id and form.validate_on_submit():
         job.job_title = form.data['job_title'],
+        # job.user_id = job.user_id,
         job.company_name = form.data['company_name'],
         job.company_image_url = form.data['company_image_url'],
         job.job_location = form.data['job_location'],
@@ -106,7 +107,8 @@ def edit_job(id):
         job.job_notes =  form.data['job_notes'],
         job.hooks =  form.data['hooks'],
         job.extra_notes =  form.data['extra_notes'],
-        job.updated_at = datetime.datetime.now()
+        # job.updated_at = datetime.datetime.now(),
+        job.list_id = 4
 
         db.session.add(job)
         db.session.commit()
