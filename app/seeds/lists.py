@@ -11,7 +11,7 @@ def seed_lists():
         created_at = datetime.now(),
         updated_at = datetime.now())
     list_2 =  List(
-        user_id=2,
+        user_id=1,
         name='Grocery list',
         notes='Must eat somethin',
         # due='Fri Mar 10 2023 18:00:00',
@@ -19,9 +19,25 @@ def seed_lists():
         created_at = datetime.now(),
         updated_at = datetime.now() )
     list_3 =  List(
-        user_id=3,
+        user_id=1,
         name='Finish Project',
         notes='If I never start I\'ll never finish!',
+        # due='Sat Mar 11 2023 18:00:00',
+        status='Done',
+        created_at = datetime.now(),
+        updated_at = datetime.now())
+    list_4 =  List(
+        user_id=1,
+        name='Software Engineer II, Mobile (IOS) todos',
+        notes='I got this!',
+        # due='Sat Mar 11 2023 18:00:00',
+        status='Done',
+        created_at = datetime.now(),
+        updated_at = datetime.now())
+    list_5 =  List(
+        user_id=1,
+        name='Software Engineer Intern',
+        notes='Let\'s get this job!',
         # due='Sat Mar 11 2023 18:00:00',
         status='Done',
         created_at = datetime.now(),
@@ -30,6 +46,8 @@ def seed_lists():
     db.session.add(list_1)
     db.session.add(list_2)
     db.session.add(list_3)
+    db.session.add(list_4)
+    db.session.add(list_5)
     db.session.commit()
 
 

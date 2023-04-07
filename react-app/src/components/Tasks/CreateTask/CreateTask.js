@@ -30,6 +30,8 @@ const CreateTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErrors([]);
+
+
     const task = {
         name,
         // due,
@@ -98,6 +100,7 @@ const CreateTask = () => {
           ></textarea>
         </div>
         <div className="todo-action-buttons">
+
           <label className="select-field-label">Select a list: </label>
           <select
             className="select-field"
@@ -105,9 +108,7 @@ const CreateTask = () => {
             value={listId}
             onChange={(e) => setListId(e.target.value)}
           >
-            {/* <option value={null} >
-              {listItems ? 'None' : 'Create lists to assign tasks'}
-            </option> */}
+
             {listItems ? listItems.map((list) => (
               <option key={list[1]} value={list[1]}>
                 {list[0]}

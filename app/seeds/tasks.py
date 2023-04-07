@@ -9,11 +9,11 @@ def seed_tasks():
         name='Cook Potato Task',
         notes='Omg I have to get tdatetime(2023, 2, 28, 15, 30, 45, 123456)his done before its too late!',
         # due='Tue Mar 7 2023 18:00:00',
-        status='In Progress',
+        status='Not Started',
         created_at = datetime.now(),
         updated_at = datetime.now() )
     task_2 =  Task(
-        user_id=2,
+        user_id=1,
         list_id=2,
         name='Get Potato Task',
         notes='Omg I have to get this done NOWWWWW!',
@@ -22,10 +22,28 @@ def seed_tasks():
         created_at = datetime.now(),
         updated_at = datetime.now() )
     task_3 =  Task(
-        user_id=3,
+        user_id=1,
         list_id=3,
         name='Finish Project',
         notes='If I never start I\'ll never finish!',
+        # due='Sat Mar 11 2023 18:00:00',
+        status='Done',
+        created_at = datetime.now(),
+        updated_at = datetime.now())
+    task_4 =  Task(
+        user_id=1,
+        list_id=4,
+        name='Call back next week',
+        notes='They told me to check in next week',
+        # due='Sat Mar 11 2023 18:00:00',
+        status='Done',
+        created_at = datetime.now(),
+        updated_at = datetime.now())
+    task_5 =  Task(
+        user_id=1,
+        list_id=5,
+        name='Connect with hiring managers',
+        notes='I have to network more before I apply 🤔',
         # due='Sat Mar 11 2023 18:00:00',
         status='Done',
         created_at = datetime.now(),
@@ -34,6 +52,8 @@ def seed_tasks():
     db.session.add(task_1)
     db.session.add(task_2)
     db.session.add(task_3)
+    db.session.add(task_4)
+    db.session.add(task_5)
     db.session.commit()
 
 

@@ -14,6 +14,7 @@
   /* width: 500px; */
   height: fit-content;
   background: #f8dfe08f;
+  /* width: fit-content; */
   /* margin: 0 auto 0; */
   /* word-break: break-all; */
   /* border: 1px solid rgba(0, 0, 0, 0.274); */
@@ -23,7 +24,7 @@
 .bloc-tabs {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 300px;
   padding: 15px;
 }
 
@@ -38,6 +39,7 @@
   position: relative;
   outline: none;
   margin-top: 5px;
+  border-radius: 8px;
 }
 /* .tabs:not(:last-child){
   border-right: 1px solid rgba(0, 0, 0, 0.274);
@@ -155,4 +157,17 @@ button {
 .job-list-no-tasks {
   display: flex;
   justify-content: center;
+}
+
+
+.add-task-modal-button.job-task {
+  text-align: end;
+}
+
+.todo-add-job-task {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -7,7 +7,7 @@ from datetime import datetime
 def seed_jobs():
     job_1 = Job(
         user_id=1,
-        list_id=1,
+        list_id=4,
         job_title='Software Engineer II, Mobile (IOS)',
         company_name='Google',
         company_image_url='https://media.wired.co.uk/photos/606da4ae938ecee6e930e9c3/master/w_1600%2Cc_limit/google-logo_2.jpg',
@@ -22,8 +22,8 @@ def seed_jobs():
         extra_notes=''
     )
     job_2 = Job(
-        user_id=2,
-        list_id=2,
+        user_id=1,
+        list_id=5,
         job_title='Software Engineer Intern',
         company_name='Yahoo',
         company_image_url='https://www.lifewire.com/thmb/yx5oJUJ4fA1TQ0h0pl9FM7Kc4Fo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/yahoo-logo-2019-879b7bed612d4bbc97065dce2a0f2d73.png',

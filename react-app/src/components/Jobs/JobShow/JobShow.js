@@ -9,6 +9,8 @@ import {
 import { useModal } from "../../../context/Modal";
 import "./JobShow.css";
 import TaskItem from "../../Tasks/TaskItem/TaskItem";
+import CreateTask from "../../Tasks/CreateTask/CreateTask";
+import OpenModalButton from "../../OpenModalButton";
 
 const JobShow = ({ job }) => {
   const dispatch = useDispatch();
@@ -265,9 +267,16 @@ const JobShow = ({ job }) => {
               }
             >
               <div className="basic-info-text">
-                <label className="input-text-label" htmlFor="job-benefits">
-                  To-dos:
-                </label>
+                <div className="todo-add-job-task">
+                  <label className="input-text-label" htmlFor="job-benefits">
+                    To-dos:
+                  </label>
+                  <OpenModalButton
+                  className="add-task-modal-button job-task"
+                  modalComponent={<CreateTask />}
+                  buttonText="Add Task"
+                  />
+                </div>
                 <p className="job-task-item">{allTasksArr.length ? taskItems : <h3 className="job-list-no-tasks">No tasks for this job yet!</h3>}</p>
               </div>
             </div>
