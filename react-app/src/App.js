@@ -37,7 +37,7 @@ function App() {
             <JobShow />
           </Route>
           <Route path="/jobs">
-            <AllJobs />
+            {user ? <AllJobs /> : <SplashPage/>}
           </Route>
           <Route exact path="/">
             {user ? <HomePage /> : <SplashPage />}

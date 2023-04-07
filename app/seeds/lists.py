@@ -36,7 +36,7 @@ def seed_lists():
         updated_at = datetime.now())
     list_5 =  List(
         user_id=1,
-        name='Software Engineer Intern',
+        name='Software Engineer Intern todos',
         notes='Let\'s get this job!',
         # due='Sat Mar 11 2023 18:00:00',
         status='Done',

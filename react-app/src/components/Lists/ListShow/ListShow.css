@@ -24,6 +24,10 @@
 
 }
 
+.list-task-name {
+  width: 100%;
+}
+
 .list-task-name:focus,
 .list-due-date-input:focus {
   border: none;
