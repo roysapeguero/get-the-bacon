@@ -7,6 +7,7 @@ import {
   getJobsThunk,
   createJobThunk
 } from "../../../store/jobs";
+import { createListThunk } from "../../../store/lists";
 import { useModal } from "../../../context/Modal";
 import "./CreateJob.css";
 import TaskItem from "../../Tasks/TaskItem/TaskItem";
@@ -15,6 +16,7 @@ const CreateJob = () => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const allTasks = useSelector((state) => state.Tasks.allTasks);
+  const currentUser = useSelector((state) => state.session.user);
   const allTasksArr = Object.values(allTasks);
 
   const [jobTitle, setJobTitle] = useState("");
@@ -50,6 +52,13 @@ const CreateJob = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    const jobList = {
+      name: `${jobTitle} todo`,
+      notes: '',
+      user_id: currentUser.id,
+    }
+
+    const list = dispatch(createListThunk(jobList))
     const job = {
       job_title: jobTitle,
       company_name: companyName,
@@ -63,7 +72,10 @@ const CreateJob = () => {
       job_notes: jobNotes,
       hooks,
       extra_notes: extraNotes,
+      listId: list.id
     };
+
+
 
     const data = await dispatch(createJobThunk(job));
     if (data) {
@@ -127,8 +139,19 @@ const CreateJob = () => {
                 toggleState === 1 ? "content  active-content" : "content"
               }
             >
-              <div className="company-img-container">
-                <img className="company-img" src={companyImageUrl} alt="" />
+              <div className="company-img-container create">
+                {/* <img className="company-img" src={companyImageUrl} alt="" /> */}
+                <label className="input-text-label" htmlFor="job-image">
+                  Company Image URL:
+                </label>
+                <input
+                  // name="job-title"
+                  className="job-title job-input-item"
+                  type="text"
+                  value={companyImageUrl}
+                  onChange={(e) => setCompanyImageUrl(e.target.value)}
+                  required
+                />
               </div>
               <div className="basic-info-text">
                 <label className="input-text-label" htmlFor="job-title">

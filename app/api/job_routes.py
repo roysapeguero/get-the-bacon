@@ -108,7 +108,7 @@ def edit_job(id):
         job.hooks =  form.data['hooks']
         job.extra_notes =  form.data['extra_notes']
         job.updated_at = datetime.datetime.now()
-        job.list_id = 4
+        job.list_id = form.data['listId']
 
         db.session.add(job)
         db.session.commit()

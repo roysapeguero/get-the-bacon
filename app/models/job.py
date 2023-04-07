@@ -28,7 +28,7 @@ class Job(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     users = db.relationship("User", back_populates = "jobs")
-    lists = db.relationship("List", back_populates = "jobs")
+    lists = db.relationship("List", back_populates = "jobs", cascade="all, delete")
 
     def to_dict(self):
         return {

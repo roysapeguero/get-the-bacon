@@ -5,6 +5,7 @@ import { useModal } from "../../../context/Modal"
 import { useHistory } from "react-router-dom"
 import './ListShow.css'
 import TaskItem from "../../Tasks/TaskItem/TaskItem"
+import { getTasksThunk } from "../../../store/tasks"
 // import OpenModalButton from "../../OpenModalButton"
 // import CreateTask from "../../Tasks/CreateTask/CreateTask"
 

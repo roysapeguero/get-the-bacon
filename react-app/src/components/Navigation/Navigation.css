@@ -77,7 +77,7 @@ ul.profile-dropdown {
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 20px;
-  width: fit-content;
+  width: 120px;
   margin-bottom: 10px;
   margin-right: 20px;
   /* border: 1px solid red; */
@@ -133,6 +133,13 @@ ul.profile-dropdown {
     text-decoration: none;
 }
 
-.jobs {
-  margin: 5px 0;
+.action.jobs {
+  margin: 5px 15px;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.action.jobs:hover {
+  color: white;
 }

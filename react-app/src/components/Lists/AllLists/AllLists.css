@@ -1,13 +1,16 @@
 .all-lists-container {
   margin-top: 150px;
-  margin-left: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
   height: 60vh;
   /* height: min-content; */
   margin-bottom: 30px;
   width: 60%;
   padding: 30px;
-  background-color: #ffccce;
-  border-radius: 20px;
+  /* background-color: #fc878b; */
+  background-image: linear-gradient(to bottom, #fc878bd3 , #FFCCCE);
+
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -66,7 +69,7 @@
   font-size: 18px;
   padding: 7px;
   font-weight: 800;
-  color: #ffccce;
+  color: #ff484e79;
   border-radius: 6px;
 
 }

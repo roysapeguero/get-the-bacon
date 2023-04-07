@@ -2,7 +2,10 @@
   /* border: 1px solid red; */
   overflow-x: hidden;
 }
-
+.modal-form-title.job {
+  text-align: center;
+  margin-left: 180px;
+}
 
 .tabs-container {
   display: flex;
@@ -100,9 +103,10 @@ button {
 }
 
 .company-img {
-  object-fit: contain;
+  object-fit: cover;
   width: 300px;
   height: 200px;
+  border-radius: 10px;
 }
 
 .job-input-item {
@@ -146,4 +150,9 @@ button {
 .job-task-item {
   margin-top: 20px;
 
+}
+
+.job-list-no-tasks {
+  display: flex;
+  justify-content: center;
 }

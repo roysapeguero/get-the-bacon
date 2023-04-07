@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import TaskShow from "../TaskShow/TaskShow";
 import OpenModalButton from "../../OpenModalButton";
 import './TaskItem.css'
+import { useDispatch, useSelector } from "react-redux";
+import { getTaskThunk } from "../../../store/tasks";
 
 const TaskItem = ({ task }) => {
   const [isChecked, setIsChecked] = useState(false)
+  const currentTask = useSelector(state => state.Tasks.singleTask)
 
   useEffect(() => {
     const storedCheckboxState = localStorage.getItem(`checkbox-${task.id}`);

@@ -7,8 +7,10 @@
   margin-bottom: 30px;
   width: 20%;
   padding: 30px;
-  background-color: #ffccce;
-  border-radius: 20px;
+  /* background-color: #ff484e79; */
+  background-image: linear-gradient(to bottom, #fc878bd3 , #FFCCCE);
+
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -68,7 +70,7 @@
   font-size: 18px;
   padding: 7px;
   font-weight: 800;
-  color: #ffccce;
+  color: #ff484e79;
   border-radius: 6px;
 }
 

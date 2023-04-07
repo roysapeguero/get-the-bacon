@@ -86,7 +86,7 @@ const JobShow = ({ job }) => {
   return (
     <div className="job-modal">
       <form onSubmit={handleSubmit}>
-        <h1 className="modal-form-title">Job Details</h1>
+        <h1 className="modal-form-title job">Job Details</h1>
         <ul className="errors-container">
           {errors?.map((error, idx) => (
             <p className="errors" key={idx}>
@@ -268,7 +268,7 @@ const JobShow = ({ job }) => {
                 <label className="input-text-label" htmlFor="job-benefits">
                   To-dos:
                 </label>
-                <p className="job-task-item">{taskItems}</p>
+                <p className="job-task-item">{allTasksArr.length ? taskItems : <h3 className="job-list-no-tasks">No tasks for this job yet!</h3>}</p>
               </div>
             </div>
           </div>

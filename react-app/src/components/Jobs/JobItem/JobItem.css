@@ -9,4 +9,5 @@
 .job-item .company-img {
   margin: 5px 0;
   border-radius: 10px;
+  object-fit: cover;
 }

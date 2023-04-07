@@ -51,7 +51,7 @@ function ProfileButton({ user }) {
             {/* <p>{user.username}</p> */}
             <p>{user.email}</p>
             {/* <p> */}
-            <NavLink className='action link jobs' to='/jobs'>Jobs</NavLink>
+            {/* <NavLink className='action link jobs' to='/jobs'>Jobs</NavLink> */}
               <p className='action link' onClick={handleLogout}>Log Out</p>
             {/* </p> */}
           </div>

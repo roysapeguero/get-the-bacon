@@ -1,14 +1,16 @@
 .all-jobs-container {
   margin-top: 150px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
   height: 60vh;
   /* height: min-content; */
   margin-bottom: 30px;
-  width: 90%;
+  width: 85%;
   padding: 30px;
-  background-color: #ffccce;
-  border-radius: 20px;
+  /* background-color: #9BC995; */
+  background-image: linear-gradient(to bottom, #87CEEB , #FFCCCE);
+
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -67,7 +69,7 @@
   font-size: 18px;
   padding: 7px;
   font-weight: 800;
-  color: #ffccce;
+  color: #FFCCCE;
   border-radius: 6px;
 
 }

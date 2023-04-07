@@ -1,0 +1,6 @@
+.company-img-container.create {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin-bottom: 0;
+}
