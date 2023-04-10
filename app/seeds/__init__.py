@@ -3,6 +3,7 @@ from .users import seed_users, undo_users
 from .tasks import seed_tasks, undo_tasks
 from .lists import seed_lists, undo_lists
 from .jobs import seed_jobs, undo_jobs
+from .networks import seed_contacts, undo_contacts
 
 from app.models.db import db, environment, SCHEMA
 
@@ -19,6 +20,7 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_contacts()
         undo_jobs()
         undo_tasks()
         undo_lists()
@@ -27,6 +29,7 @@ def seed():
     seed_lists()
     seed_tasks()
     seed_jobs()
+    seed_contacts()
     # Add other seed functions here
 
 
@@ -34,6 +37,7 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_jobs()
+    undo_contacts()
     undo_tasks()
     undo_lists()
     undo_users()

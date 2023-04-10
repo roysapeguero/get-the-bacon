@@ -12,13 +12,18 @@ class Network(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
     list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")))
-    contact_position = db.Column(db.String(200), nullable=False)
-    company_name = db.Column(db.String(200), nullable=False)
-    first_name = db.Column(db.String(200), nullable=False)
-    last_name = db.Column(db.String(200), nullable=False)
-    contact_image_url = db.Column(db.String(200), nullable=False)
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    position = db.Column(db.String(100), nullable=False)
+    company_name = db.Column(db.String(100), nullable=False)
+    # contact_image_url = db.Column(db.String(200), nullable=False)
     contact_notes = db.Column(db.String(1500))
-    job_location = db.Column(db.String(200))
+    company_location = db.Column(db.String(100))
+    linkedin = db.Column(db.String(100))
+    github = db.Column(db.String(100))
+    number = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    site = db.Column(db.String(100))
     position_of_interest = db.Column(db.String(200))
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
@@ -31,14 +36,19 @@ class Network(db.Model):
             'id': self.id,
             'user_id': self.user_id,
             'list_id': self.list_id,
-            'contact_position': self.contact_position,
-            'company_name': self.company_name,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'contact_image_url': self.contact_image_url,
-            'job_location': self.job_location,
+            'position': self.position,
+            'company_name': self.company_name,
+            # 'contact_image_url': self.contact_image_url,
+            'company_location': self.company_location,
             'contact_notes': self.contact_notes,
-            'position_of_interest': self.contact_notes,
+            'linkedin': self.linkedin,
+            'github': self.github,
+            'number': self.number,
+            'email': self.email,
+            'site': self.site,
+            'position_of_interest': self.position_of_interest,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

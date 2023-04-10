@@ -10,6 +10,7 @@ class NetworkForm(FlaskForm):
     last_name = StringField('last_name', validators=[DataRequired()])
     company_name = StringField('company_name', validators=[DataRequired()])
     company_location = StringField('company_location', validators=[DataRequired()])
+    company_notes = StringField('company_notes', validators=[DataRequired()])
     linkedin = StringField('linkedin')
     github = StringField('github')
     number = StringField('number')

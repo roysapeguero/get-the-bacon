@@ -52,24 +52,24 @@ def create_contact():
     """
     form = NetworkForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # print('i made it ----------------------------', task)
 
     if form.validate_on_submit():
         contact = Network(
         user_id = current_user.id,
         list_id = form.data['list_id'],
-        job_title = form.data['job_title'],
+        position = form.data['position'],
+        first_name = form.data['first_name'],
+        last_name = form.data['last_name'],
         company_name = form.data['company_name'],
-        company_image_url = form.data['company_image_url'],
-        job_location = form.data['job_location'],
-        status = form.data['status'],
-        benefits = form.data['benefits'],
-        listing_url = form.data['listing_url'],
-        job_description =  form.data['job_description'],
-        salary =  form.data['salary'],
-        job_notes =  form.data['job_notes'],
-        hooks =  form.data['hooks'],
-        extra_notes =  form.data['extra_notes'],
+        # company_image_url = form.data['company_image_url'],
+        company_location = form.data['company_location'],
+        linkedin = form.data['linkedin'],
+        github = form.data['github'],
+        number = form.data['number'],
+        email =  form.data['email'],
+        site =  form.data['site'],
+        position_of_interest =  form.data['position_of_interest'],
+        contact_notes =  form.data['contact_notes'],
         created_at = datetime.datetime.now(),
         updated_at = datetime.datetime.now()
         )
@@ -93,21 +93,22 @@ def edit_contact(id):
     contact = Network.query.get(id)
 
     if current_user.id == contact.user_id and form.validate_on_submit():
-        contact.job_title = form.data['job_title']
+        contact.position = form.data['position']
         # job.user_id = job.user_id,
+        contact.list_id = form.data['list_id']
+        contact.first_name = form.data['first_name']
+        contact.last_name = form.data['last_name']
+        contact.position = form.data['position']
         contact.company_name = form.data['company_name']
-        contact.company_image_url = form.data['company_image_url']
-        contact.contact_location = form.data['contact_location']
-        contact.status = form.data['status']
-        contact.benefits = form.data['benefits']
-        contact.listing_url = form.data['listing_url']
-        contact.contact_description =  form.data['contact_description']
-        contact.salary =  form.data['salary']
+        contact.company_location = form.data['company_location']
         contact.contact_notes =  form.data['contact_notes']
-        contact.hooks =  form.data['hooks']
-        contact.extra_notes =  form.data['extra_notes']
+        contact.linkedin = form.data['linkedin']
+        contact.github = form.data['github']
+        contact.number = form.data['number']
+        contact.email = form.data['email']
+        contact.site =  form.data['site']
+        contact.position_of_interest =  form.data['position_of_interest']
         contact.updated_at = datetime.datetime.now()
-        contact.list_id = form.data['listId']
 
         db.session.add(contact)
         db.session.commit()
