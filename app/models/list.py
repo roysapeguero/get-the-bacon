@@ -21,6 +21,7 @@ class List(db.Model):
     users = db.relationship("User", back_populates = "lists")
     jobs = db.relationship("Job", back_populates = "lists")
     tasks = db.relationship("Task", back_populates = "lists", cascade="all, delete")
+    networks = db.relationship("Network", back_populates = "lists")
 
 
     def to_dict(self):

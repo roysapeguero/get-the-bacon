@@ -16,11 +16,10 @@ def seed_contacts():
         contact_notes='We talked April 1st, they were looking to hire a UX Designer and said to check in 2 weeks',
         linkedin="N/a",
         github="N/a",
-        linkedin="N/a",
         number="N/a",
         email="N/a",
         site="https://www.google.com",
-        position_of_interest='Full Stack Developer',
+        position_of_interest='Full Stack Developer'
     )
     contact_2 = Network(
         user_id=1,
@@ -33,11 +32,10 @@ def seed_contacts():
         contact_notes='They were looking to hire a Full Stack Dev but I did\'t have enough experience so they said to check in next month',
         linkedin="N/a",
         github="N/a",
-        linkedin="N/a",
         number="N/a",
         email="N/a",
         site="https://www.yahoo.com",
-        position_of_interest='Full Stack Developer',
+        position_of_interest='Frontend Developer'
     )
     contact_3 = Network(
         user_id=1,
@@ -50,11 +48,10 @@ def seed_contacts():
         contact_notes='They mentioned their dog Tucky was having surgery so remember to ask about how that went! Said they might have an internship coming up in the summer :3',
         linkedin="N/a",
         github="N/a",
-        linkedin="N/a",
         number="N/a",
         email="N/a",
         site="https://www.youtube.com",
-        position_of_interest='Full Stack Developer',
+        position_of_interest='Backend Developer'
     )
 
 
