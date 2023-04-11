@@ -21,7 +21,8 @@ function Navigation({ isLoaded }) {
         </div>
 				<div className="header-right">
         {sessionUser ? <NavLink className='action link jobs' to='/'>Home</NavLink> : ''}
-        {sessionUser ? <NavLink className='action link jobs' to='/jobs'>Jobs</NavLink> : ''}
+        {sessionUser ? <NavLink className='action link jobs' to='/jobs'>My Jobs</NavLink> : ''}
+        {sessionUser ? <NavLink className='action link jobs' to='/contacts'>My Contacts</NavLink> : ''}
         {isLoaded && <ProfileButton user={sessionUser} />}
 				</div>
       </div>

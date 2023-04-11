@@ -43,8 +43,8 @@ def get_contact(id):
 
     return contact.to_dict()
 
-
-# Create contact ('/', methods=['POST'])
+# Create contact
+@network_routes.route('/', methods=['POST'])
 @login_required
 def create_contact():
     """
@@ -56,7 +56,7 @@ def create_contact():
     if form.validate_on_submit():
         contact = Network(
         user_id = current_user.id,
-        list_id = form.data['list_id'],
+        # list_id = form.data['list_id'],
         position = form.data['position'],
         first_name = form.data['first_name'],
         last_name = form.data['last_name'],
@@ -93,9 +93,8 @@ def edit_contact(id):
     contact = Network.query.get(id)
 
     if current_user.id == contact.user_id and form.validate_on_submit():
-        contact.position = form.data['position']
-        # job.user_id = job.user_id,
-        contact.list_id = form.data['list_id']
+        contact.user_id = current_user.id
+        # contact.list_id = form.data['list_id']
         contact.first_name = form.data['first_name']
         contact.last_name = form.data['last_name']
         contact.position = form.data['position']

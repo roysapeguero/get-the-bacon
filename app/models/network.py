@@ -11,7 +11,7 @@ class Network(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")))
-    list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")))
+    # list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("lists.id")))
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     position = db.Column(db.String(100), nullable=False)
@@ -29,13 +29,13 @@ class Network(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now())
 
     users = db.relationship("User", back_populates = "networks")
-    lists = db.relationship("List", back_populates = "networks", cascade="all, delete")
+    # lists = db.relationship("List", back_populates = "networks", cascade="all, delete")
 
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'list_id': self.list_id,
+            # 'list_id': self.list_id,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'position': self.position,

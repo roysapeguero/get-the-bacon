@@ -4,12 +4,14 @@ import session from './session'
 import tasksReducer from './tasks';
 import listsReducer from './lists';
 import jobsReducer from './jobs';
+import contactsReducer from './networks';
 
 const rootReducer = combineReducers({
   session,
   Tasks: tasksReducer,
   Lists: listsReducer,
   Jobs: jobsReducer,
+  Contacts: contactsReducer,
 });
 
 

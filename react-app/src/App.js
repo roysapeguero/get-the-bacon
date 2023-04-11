@@ -10,7 +10,8 @@ import SplashPage from "./components/SplashPage/SplashPage";
 import HomePage from "./components/HomePage/HomePage";
 import Footer from "./components/Footer/Footer";
 import AllJobs from "./components/Jobs/AllJobs/AllJobs";
-import JobShow from "./components/Jobs/JobShow/JobShow";
+import AllContacts from "./components/Contacts/AllContacts/AllContacts";
+// import JobShow from "./components/Jobs/JobShow/JobShow";
 
 
 function App() {
@@ -33,11 +34,14 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/jobs/:jobId">
+          {/* <Route path="/jobs/:jobId">
             <JobShow />
-          </Route>
+          </Route> */}
           <Route path="/jobs">
             {user ? <AllJobs /> : <SplashPage/>}
+          </Route>
+          <Route path="/contacts">
+            {user ? <AllContacts /> : <SplashPage/>}
           </Route>
           <Route exact path="/">
             {user ? <HomePage /> : <SplashPage />}
