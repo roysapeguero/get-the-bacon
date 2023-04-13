@@ -1,5 +1,3 @@
-// import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
 import ContactShow from "../ContactShow/ContactShow";
 import OpenModalButton from "../../OpenModalButton";
 import './ContactItem.css'
@@ -9,7 +7,7 @@ const ContactItem = ({ contact }) => {
   return (
     <div className="contact-item">
       <OpenModalButton
-        className="open-task-modal-button list"
+        className="open-task-modal-button contact list"
         modalComponent={
           <ContactShow contact={contact}/>
         }

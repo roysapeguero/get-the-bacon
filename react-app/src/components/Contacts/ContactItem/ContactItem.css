@@ -1,0 +1,12 @@
+.contact-item {
+  background-color: white;
+  width: 200px;
+  height: fit-content;
+  border-radius: 5px;
+  margin: 20px 10px;
+  display: flex;
+}
+
+.open-task-modal-button.contact {
+  color: #96e8b4;
+}

@@ -29,14 +29,14 @@ const AllContacts = () => {
   }
 
   return (
-    <div className="all-jobs-container">
-      <div className="jobs-top-container">
-        <h2 className="all-jobs-header">Contacts</h2>
+    <div className="all-contacts-container">
+      <div className="contacts-top-container">
+        <h2 className="all-contacts-header">Contacts</h2>
       </div>
       {allContactsArr.length ? (
         <>
-          <div className="jobs-container">
-            <ul className="jobs-wrapper">{contactItems}</ul>
+          <div className="contacts-container">
+            <ul className="contacts-wrapper">{contactItems}</ul>
           </div>
         </>
       ) : (
@@ -44,9 +44,9 @@ const AllContacts = () => {
           <h2>Click 'Add Contact' to make your first contact!</h2>
         </>
       )}
-      <div className="jobs-button-container">
+      <div className="contacts-button-container">
         <OpenModalButton
-          className="add-job-modal-button"
+          className="add-contact-modal-button"
           modalComponent={<CreateContact />}
           buttonText="Add Contact"
         />
